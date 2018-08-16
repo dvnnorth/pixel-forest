@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sweet Pea | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"><!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"><!-- Font Awesome -->
+    <link rel="stylesheet" href="./styles/css/main.css"><!-- External CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    
+  </head>
+  <body>
+    <nav class="navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand mx-auto" href="#">Albums</a>
+            <input class="headerSearch ml-auto" type="text" name="search" placeholder="Search...">
+            <div class="dropdown">
+                <i class="fas fa-plus"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-images"></i> Upload A Photo</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container group">
+        <h6>Groups</h6>
+        <div class="main-carousel">
+            <div class="carousel-cell"><img class="bannerImg" src="https://source.unsplash.com/random?sig=92/1980x1114" alt="random thumbnail"></div>
+            <div class="carousel-cell"><img class="bannerImg" src="https://source.unsplash.com/random?sig=93/1980x1114" alt="random thumbnail"></div>
+            <div class="carousel-cell"><img class="bannerImg" src="https://source.unsplash.com/random?sig=94/1980x1114" alt="random thumbnail"></div>
+        </div>
+      </div>
+
+    <div class="container group">
+      <h6>Recent Uploads</h6>
+      <div class="cssGrid">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=1/200x200" alt="random thumbnail">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=1/200x200" alt="random thumbnail">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=3/200x200" alt="random thumbnail">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=4/200x200" alt="random thumbnail">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=5/200x200" alt="random thumbnail">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=6/200x200" alt="random thumbnail">
+          <img height="200" width="200" src="https://source.unsplash.com/random?sig=7/200x200" alt="random thumbnail">
+        </div>
+    </div>
+    
+    <div class="container group">
+        <h6>Popular Posts</h6>
+        <div class="cssGrid">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=8/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=9/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=10/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=11/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=12/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=13/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=14/200x200" alt="random thumbnail">
+            <img height="200" width="200" src="https://source.unsplash.com/random?sig=15/200x200" alt="random thumbnail">
+          </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+            <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
+        </div>
+      </footer>
+
+      <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="POST">
+          <label for="upload">Upload:</label>
+          <input id="upload" type="text"> <button>Browse..</button>
+
+          <label for="title">Title:</label>
+          <input id="title" type="text">
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" cols="30" rows="10"></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    
+    <script> 
+    var elem = document.querySelector('.main-carousel');
+    var flkty = new Flickity( elem, {
+      // options
+      cellAlign: 'left',
+      contain: true
+    });
+    </script>
+  </body>
+</html>
