@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form action="" id="login">
+  email: <input type="text" name="email" id="email" value="you@domain.com"><br>
+  password: <input type="password" name="password" id="password" value="password"><br>
+  <input type="submit" value="Submit">
+</form> 
+
+<script>
+$("#login").on("submit", function(event) {
+        // Make sure to preventDefault on a submit event.
+        event.preventDefault();
+  
+        var userInfo = {
+          email: $("#login [name=email]").val().trim(),
+          password: $("#login [name=password]").val().trim()
+        };
+        console.log(userInfo);
+        // Send the POST request.
+        $.ajax("/login/signup", {
+          type: "POST",
+          data: userInfo
+        }).then(
+          function() {
+            console.log("Succesfully Logged in");
+            // Reload the page to get the updated list
+            location.reload();
+          }
+        );
+    });
+</script>
+
+</body>
+</html>
