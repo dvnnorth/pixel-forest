@@ -1,24 +1,50 @@
-var db = require("../models");
+var db = require('../models');
 
-module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+module.exports = function (app) {
+    // Create a new post
+    app.get('/profile/post', function (req, res) {
+    // Retrieve image and post data from request
+    // Upload image to storage (encrypt?)
+    // Get photo cloud storage location
+    // Insert new post into posts table
+    // Render/return new post page in response
     });
-  });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+    // Create a new group
+    app.post('/group', function (req, res) {
+    // Retrieve group name and image
+    // Upload image to storage
+    // Get photo storage location
+    // Insert new group data into groups table
+    // render/return new group page
     });
-  });
+
+    // Update a post
+    app.put('/profile/post', function (req, res) {
+    // Grab data to be updated
+    // Update columns for post in posts table
+    // render/return updated post page
+    });
+
+    // Delete a post
+    app.delete('/profile/post', function (req, res) {
+    // Get post ID from request
+    // Delete image from hosting
+    // Remove entry from table
+    // Return 200 if successful
+    // Or redirect to profile page with message?
+    });
+
+    // Delete account
+    app.delete('/profile', function (req, res) {
+    // After front end handles confirmation
+    // Get profile information from request
+    // Delete all posts associated with profile
+    //   Same procedure as post delete route for 
+    //   all relevant posts
+    // Delete group associated with profile
+    // Delete profile
+    // Return 200 if successful
+    });
 };
