@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sweet Pea | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, activeNavbar-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"><!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"><!-- Font Awesome -->
+    <link rel="stylesheet" href="./styles/css/main.css"><!-- External CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    
+  </head>
+  <body>
+    <nav class="navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+              <img src="./media/sweetPeaLogo.png" alt="sweetPeaLogo">
+            </a>
+            <input class="headerSearch ml-auto" type="text" name="search" placeholder="Search...">
+            <div class="dropdown">
+                <i class="fas fa-plus"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-images"></i> Upload A Photo</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-certificate"></i> About Sweet Pea</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container group">
+        <h3>Popular Posts</h3>
+        <div class="cssGridThreeMax">
+          <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,child,baby,infant" alt="random thumbnail">
+          <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babysit,babies" alt="random thumbnail">
+          <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babies" alt="random thumbnail">
+        </div>
+      </div>
+
+    <div class="container group">
+      <h3>April - 2018</h3>
+      <div class="cssGridAutofill">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,playing" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,kids" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
+        </div>
+    </div>
+    
+    <div class="container group">
+      <h3>May - 2018</h3>
+      <div class="cssGridAutofill">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,kids" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,daycare" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,smile" alt="random thumbnail">
+        </div>
+    </div>
+
+    <div class="container group">
+      <h3>Popular Posts</h3>
+      <div class="cssGridThreeMax">
+        <img height="360" width="360" src="https://source.unsplash.com/1600x900/?infant,baby" alt="random thumbnail">
+        <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,minor,infant" alt="random thumbnail">
+        <img height="360" width="360" src="https://source.unsplash.com/1600x900/?teenager,thirteen" alt="random thumbnail">
+      </div>
+    </div>
+
+    <div class="container group">
+      <h3>June - 2018</h3>
+      <div class="cssGridAutofill">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?milk" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?child,infant" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
+          <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children," alt="random thumbnail">
+        </div>
+    </div>
+
+      <footer class="footer">
+        <div class="container">
+            <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
+        </div>
+      </footer>
+
+      <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="POST">
+          <label for="upload">Upload:</label>
+          <input id="upload" type="text"> <button>Browse..</button>
+
+          <label for="title">Title:</label>
+          <input id="title" type="text">
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" cols="30" rows="10"></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    
+    <script> 
+      $(document).on("scroll", function(){
+          if ($(document).scrollTop() > 100) {
+            $(".navbar").addClass("activeNavbar");
+            $('.bg').addClass('show');
+          } else {
+            $(".navbar").removeClass("activeNavbar");
+            $('.bg').removeClass('show');	
+          }
+      });
+
+    </script>
+  </body>
+</html>
