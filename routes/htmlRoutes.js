@@ -1,34 +1,40 @@
-var db = require("../models");
-var path = require('path');
+var db = require('../models');
 
 module.exports = function (app) {
-  // Load index page
-  app.get("/", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
-      });
+    // Load home page
+    app.get('/', function (req, res) {
+        // Render and return home page
     });
-  });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function (req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
+    // Load login screen
+    app.get('/login', function (req, res) {
+        // Render and return login page
+        res.render('login');
     });
-  });
 
-  // Render 404 page for any unmatched routes
-  
-  // test page to test route
-  app.get("/login.html", function (req, res) {
-    res.sendfile(path.join(__dirname, "../login.html"));
-  });
-  
-  app.get("*", function (req, res) {
-    res.render("404");
-  });
+    app.get('/login/signup', function (req, res) {
+        res.render('signup');
+    });
+
+    // If user doesn't have access, send back 401 Unauthorized
+
+    // Load profile page
+    app.get('/profile', function (req, res) {
+        // Render and return home page
+    });
+
+    // Load group page
+    app.get('/group', function (req, res) {
+        // Render and return home page
+    });
+
+    // Load post page
+    app.get('/profile/post', function (req, res) {
+        // Render and return home page
+    });
+
+    // Render 404 page for any unmatched routes
+    app.get('*', function (req, res) {
+        res.render('404');
+    });
 };
