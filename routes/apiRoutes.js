@@ -1,6 +1,13 @@
 const db = require('../models');
 const firebase = require('../config/firebase');
 
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        console.log(user.uid);
+    }
+});
+
 module.exports = function (app) {
     // Create a new post
     app.post('/profile/post', function (req, res) {
@@ -22,15 +29,37 @@ module.exports = function (app) {
 
     // Log-in user
     app.post('/login', function (req, res) {
-        firebase.auth();
+        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+            .then(function (data) {
+                let user = data.user;
+                if (user) {
+                    res.send(user.uid);
+                }
+                else {
+                    res.render('login');
+                }
+            })
+            .catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+            });
     });
 
     // Sign-up new user
     app.post('/login/signup', function (req, res) {
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+            .then(function (data) {
+                let user = data.user;
+                if (user) {
+                    res.send(user.uid);
+                }
+                else {
+                    res.render('login');
+                }
+            })
             .catch(function (error) {
-                // Handle Errors here.
-                console.log(error);
                 res.statusCode = 401;
                 res.send(error);
             })

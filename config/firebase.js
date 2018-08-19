@@ -11,11 +11,4 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-firebase.auth().onAuthStateChanged(function (user) {
-    console.log(user.l);
-    let token = {
-        id: user.l
-    };
-});
-
 module.exports = firebase;

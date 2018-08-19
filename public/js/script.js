@@ -15,9 +15,16 @@ $(function () {
             email: $('#inputEmail').val().trim(),
             password: $('#inputPassword').val().trim()
         }
-        $.post(endpoint, userInfo, function (data) {
+        $.post(endpoint, userInfo, function (userID) {
             console.log("success");
-            console.log(JSON.parse(data));
+            sessionStorage.setItem('userID', userID);
+            $.ajax({
+                method: 'GET',
+                url: '/profile',
+                headers: {
+                    Authorization: 'Bearer ' + 
+                }
+            })
         })
             .fail(function (response) {
                 $("#errorMessage").text(response.responseJSON.message);
