@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     //need to have user's name, emailAdd, and BOOLEAN owner
-    const users = sequelize.define('users', {
+    const Users = sequelize.define('Users', {
       //email address only
         email: {
             type:DataTypes.STRING,
@@ -34,13 +34,13 @@ module.exports = function(sequelize, DataTypes) {
           },
         }
     );
-    users.associate = function(models){
-      //user must belong to a group as an owner or invitee
-      users.belongTo(models.groups, {
-        onDelete: 'cascade',
-        foreignKey: {allowNull: false}
-      });
+    Users.associate = function(models){
+      //A user can have many membership
+      Users.hasMany(models.Members), { 
+      }
+      //A user can have many membership
+      Users.hasMany(models.Posts), { 
+      }
     };
-
-    return users;
+    return Users;
 };

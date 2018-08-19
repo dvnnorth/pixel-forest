@@ -1,9 +1,9 @@
-//POSTS
+//Posts
 module.exports = function(sequelize, DataTypes) {
-    // Group table will hold the fk from the users 
-    const posts = sequelize.define('posts', {
-      //not sure urlId
-        urlId: {
+    // Group table will hold the fk from the Users 
+    const Posts = sequelize.define('Posts', {
+      //firebase photo url id 
+        pictureUrl: {
             type:DataTypes.TEXT,
             allowNull: true,
             validate: {
@@ -26,19 +26,17 @@ module.exports = function(sequelize, DataTypes) {
               len:[1,500]
             }
           },
-        },
-
-        posts.associate = function(models){
+      },
+        Posts.associate = function(models){
           //post must belong to a user
-          posts.belongsTo(models.users,{ 
-            //post's tables fk is posting user's pk
-            foreignKey: {allowNull: false}
-          })
-          posts.hasOne(models.groups,{ 
-            //post's tables fk is posting user's pk
-            foreignKey: {allowNull: false}
-          })
+          Posts.belongsTo(models.Users,{  
+            foreignKey: models.Users.id
+          });
+            //a post is only displaying in one specific group
+          Posts.hasOne(models.Groups, {
+            foreignKey: models.Groups.id
+          });
         }
     );
-    return posts;
+    return Posts;
 }
