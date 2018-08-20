@@ -1,4 +1,14 @@
 $(function () {
+    $(document).on("scroll", function(){
+        if ($(document).scrollTop() > 100) {
+          $(".navbar").addClass("activeNavbar");
+          $('.bg').addClass('show');
+        } else {
+          $(".navbar").removeClass("activeNavbar");
+          $('.bg').removeClass('show');	
+        }
+    });
+
     $('#signUpSubmit').click(function (event) {
         event.preventDefault();
         submitUserPass('/login/signup');
@@ -16,11 +26,13 @@ $(function () {
             password: $('#inputPassword').val().trim()
         }
         $.post(endpoint, userInfo, function (token) {
-            console.log("success");
+            console.log('setting token');
             sessionStorage.setItem('token', token);
+            console.log('redirecting');
             window.location.replace('/group');
         })
             .fail(function (response) {
+                console.log('catching an error');
                 loginError(response);
             });
     }

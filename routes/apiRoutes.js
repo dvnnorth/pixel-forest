@@ -38,10 +38,11 @@ module.exports = function (app, firebase, fbAdmin) {
     // Sign-up new user
     app.post('/login/signup', function (req, res) {
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
-            .then(function (data) {
+            .then(function () {
                 sendUser(res);
             })
             .catch(function (error) {
+                console.log('error309480398');
                 res.statusCode = 401;
                 res.send(error);
             })
@@ -91,6 +92,7 @@ module.exports = function (app, firebase, fbAdmin) {
                 res.statusCode = 200;
                 res.send(idToken)
             }).catch(function (error) {
+                console.log('error238948');
                 res.statusCode = 401;
                 res.send(error);
             });
