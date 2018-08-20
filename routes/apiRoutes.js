@@ -1,14 +1,7 @@
 const db = require('../models');
-const firebase = require('../config/firebase');
 
+module.exports = function (app, firebase, fbAdmin) {
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        console.log(user.uid);
-    }
-});
-
-module.exports = function (app) {
     // Create a new post
     app.post('/profile/post', function (req, res) {
         // Retrieve image and post data from request
@@ -29,40 +22,34 @@ module.exports = function (app) {
 
     // Log-in user
     app.post('/login', function (req, res) {
+        // Sign In User
         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
-            .then(function (data) {
-                let user = data.user;
-                if (user) {
-                    res.send(user.uid);
-                }
-                else {
-                    res.render('login');
-                }
+            .then(function () {
+                // If successful, get token then send token to client for session storage
+                sendUser(res);
             })
+            // Sign in errors
             .catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // ...
-            });
+                res.statusCode = 401;
+                res.send(error);
+            })
     });
 
     // Sign-up new user
     app.post('/login/signup', function (req, res) {
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
             .then(function (data) {
-                let user = data.user;
-                if (user) {
-                    res.send(user.uid);
-                }
-                else {
-                    res.render('login');
-                }
+                sendUser(res);
             })
             .catch(function (error) {
                 res.statusCode = 401;
                 res.send(error);
             })
+    });
+
+    // Log a user out
+    app.post('/logout', function (req, res) {
+
     });
 
     // Update a post
@@ -97,4 +84,15 @@ module.exports = function (app) {
         // Delete profile
         // Return 200 if successful
     });
+
+    function sendUser(res) {
+        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+            .then(function (idToken) {
+                res.statusCode = 200;
+                res.send(idToken)
+            }).catch(function (error) {
+                res.statusCode = 401;
+                res.send(error);
+            });
+    }
 };

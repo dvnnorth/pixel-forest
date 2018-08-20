@@ -2,7 +2,27 @@ require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
-var firebaseMiddleware = require('express-firebase-middleware');
+var firebase = require('firebase');
+var fbAdmin = require('firebase-admin');
+
+// Config and initialize Firebase obj
+var firebaseConfig = {
+    apiKey: "AIzaSyC-UJaQ-ItnQxwUJdeHq6a8rTf_b3SbQR0",
+    authDomain: "sweet-pea-43415.firebaseapp.com",
+    databaseURL: "https://sweet-pea-43415.firebaseio.com",
+    projectId: "sweet-pea-43415",
+    storageBucket: "sweet-pea-43415.appspot.com",
+    messagingSenderId: "817762189617"
+};
+firebase.initializeApp(firebaseConfig);
+
+// Config and initialize Firebase admin obj
+var serviceAccount = require('./admin/sweet-pea-43415-firebase-adminsdk-bsj7n-36bf6cfda5.json');
+
+fbAdmin.initializeApp({
+    credential: fbAdmin.credential.cert(serviceAccount),
+    databaseURL: 'https://sweet-pea-43415.firebaseio.com'
+});
 
 var db = require('./models');
 
@@ -13,7 +33,6 @@ var PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use(firebaseMiddleware.auth);
 
 // Handlebars
 app.engine(
@@ -25,8 +44,8 @@ app.engine(
 app.set('view engine', 'handlebars');
 
 // Routes
-require('./routes/apiRoutes')(app);
-require('./routes/htmlRoutes')(app);
+require('./routes/apiRoutes')(app, firebase, fbAdmin);
+require('./routes/htmlRoutes')(app, firebase, fbAdmin);
 
 var syncOptions = { force: false };
 

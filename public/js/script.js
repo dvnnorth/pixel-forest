@@ -15,20 +15,18 @@ $(function () {
             email: $('#inputEmail').val().trim(),
             password: $('#inputPassword').val().trim()
         }
-        $.post(endpoint, userInfo, function (userID) {
+        $.post(endpoint, userInfo, function (token) {
             console.log("success");
-            sessionStorage.setItem('userID', userID);
-            $.ajax({
-                method: 'GET',
-                url: '/profile',
-                headers: {
-                    Authorization: 'Bearer ' + 
-                }
-            })
+            sessionStorage.setItem('token', token);
+            window.location.replace('/group');
         })
             .fail(function (response) {
-                $("#errorMessage").text(response.responseJSON.message);
-                $("#errorBlock").removeClass("d-none");
+                loginError(response);
             });
+    }
+
+    function loginError(response) {
+        $("#errorMessage").text(response.responseJSON.message);
+        $("#errorBlock").removeClass("d-none");
     }
 });
