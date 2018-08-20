@@ -14,6 +14,7 @@ module.exports = function (app, firebase, fbAdmin) {
     // Load home page
     app.get('/', function (req, res) {
         // Render and return home page
+        res.render('home');
     });
 
     // Load login screen

@@ -3,13 +3,13 @@ $(function () {
         $.ajax({
             method: 'GET',
             url: '/group',
+            async: true,
             headers: {
                 token: sessionStorage.getItem('token')
             }
         })
             .then(function (response) {
-                console.log('rendering');
-                $('body').html(response);
+                document.body.innerHTML = response;
             })
             .fail(function () {
                 window.location.replace(window.location.host + '/login');
