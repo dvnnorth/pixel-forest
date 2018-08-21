@@ -7,17 +7,17 @@ var fbAdmin = require('firebase-admin');
 
 // Config and initialize Firebase obj
 var firebaseConfig = {
-    apiKey: "AIzaSyC-UJaQ-ItnQxwUJdeHq6a8rTf_b3SbQR0",
-    authDomain: "sweet-pea-43415.firebaseapp.com",
-    databaseURL: "https://sweet-pea-43415.firebaseio.com",
-    projectId: "sweet-pea-43415",
-    storageBucket: "sweet-pea-43415.appspot.com",
-    messagingSenderId: "817762189617"
+    apiKey: "AIzaSyA6FqIL02M3IGmtfWPNFdXTV8Aw_FIY6ZQ",
+    authDomain: "sweetpea-74522.firebaseapp.com",
+    databaseURL: "https://sweetpea-74522.firebaseio.com",
+    projectId: "sweetpea-74522",
+    storageBucket: "sweetpea-74522.appspot.com",
+    messagingSenderId: "1006334747003"
 };
 firebase.initializeApp(firebaseConfig);
 
 // Config and initialize Firebase admin obj
-var serviceAccount = require('./admin/sweet-pea-43415-firebase-adminsdk-bsj7n-36bf6cfda5.json');
+var serviceAccount = require('./admin/sweetpea-74522-firebase-adminsdk-kenx4-dfcba4dca9.json');
 
 fbAdmin.initializeApp({
     credential: fbAdmin.credential.cert(serviceAccount),

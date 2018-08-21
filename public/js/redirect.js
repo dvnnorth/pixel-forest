@@ -1,4 +1,5 @@
 $(function () {
+    let loginEndpoint = window.location.protocol + '//' + window.location.host + '/login';
     if (sessionStorage.getItem('token')) {
         $.ajax({
             method: 'GET',
@@ -12,10 +13,10 @@ $(function () {
                 document.body.innerHTML = response;
             })
             .fail(function () {
-                window.location.replace(window.location.host + '/login');
+                window.location.replace(loginEndpoint);
             })
     }
     else {
-        window.location.replace(window.location.host + '/login');
+        window.location.replace(loginEndpoint);
     }
 });
