@@ -7,10 +7,13 @@
         <div class="dropdown">
             <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-images"></i>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fas fa-images"></i>
                     Upload A Photo</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-certificate"></i> About Sweet Pea</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-certificate"></i> About Sweet Pea</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs"></i> Settings</a>
             </div>
         </div>
         <p>{{email}}</p>
@@ -69,28 +72,28 @@
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="POST">
+                <form action="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <label for="upload">Upload:</label>
-                        <input id="upload" type="text"> <button>Browse..</button>
+                        <input id="upload" type="file">
 
                         <label for="title">Title:</label>
                         <input id="title" type="text">
 
                         <label for="description">Description:</label>
                         <textarea id="description" name="description" cols="30" rows="10"></textarea>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
