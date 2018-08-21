@@ -1,11 +1,11 @@
 $(function () {
-    $(document).on("scroll", function(){
+    $(document).on("scroll", function () {
         if ($(document).scrollTop() > 100) {
-          $(".navbar").addClass("activeNavbar");
-          $('.bg').addClass('show');
+            $(".navbar").addClass("activeNavbar");
+            $('.bg').addClass('show');
         } else {
-          $(".navbar").removeClass("activeNavbar");
-          $('.bg').removeClass('show');	
+            $(".navbar").removeClass("activeNavbar");
+            $('.bg').removeClass('show');
         }
     });
 

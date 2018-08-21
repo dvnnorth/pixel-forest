@@ -43,7 +43,7 @@ module.exports = function (app, firebase, fbAdmin) {
         let token = req.header('token');
 
         if (token) {
-            checkAuth(token, function (decodedToken) {
+            checkAuth(token, res, function (decodedToken) {
                 let uid = decodedToken.uid;
                 fbAdmin.auth().getUser(uid)
                     .then(function (userRecord) {
@@ -57,7 +57,7 @@ module.exports = function (app, firebase, fbAdmin) {
                     .catch(function (error) {
                         console.log("Error fetching user data:", error);
                     });
-            })
+            });
         }
         else {
             res.render('redirect');
@@ -77,7 +77,7 @@ module.exports = function (app, firebase, fbAdmin) {
     // This helper function provides the authorization functionality with firebase to verify if a user is properly authenticated
     // It verifies that the token is valid and that there is a current session and then either runs onSuccess callback (passing the decoded token)
     // if successful, or onFailure callback (if provided) if there is an error
-    function checkAuth(token, onSuccess, onFailure) {
+    function checkAuth(token, res, onSuccess, onFailure) {
         fbAdmin.auth().verifyIdToken(token)
             .then(function (decodedToken) {
                 onSuccess(decodedToken);
