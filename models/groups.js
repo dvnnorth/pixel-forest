@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
     // Group table will hold the fk from the Users 
 
-    const Groups = sequelize.define('groups', {
+    const Groups = sequelize.define('Groups', {
       //name of the group no longer than 30 characters
           groupName: {
             type:DataTypes.STRING,
@@ -23,9 +23,9 @@ module.exports = function(sequelize, DataTypes) {
     );
     Groups.associate = function(models){
       //Groups has at least one owner with ownersPk as Fk.
-      Groups.hasMany(Members,{
+      Groups.hasMany(models.Members,{
         foreignKey: models.Members.id
-      })
+      });
       //Groups has many posts
       Groups.hasMany(models.Posts, {
         onDelete: 'cascade'

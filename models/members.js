@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
     // Group table will hold the fk from the users 
-    const Members = sequelize.define('members',{
+    const Members = sequelize.define('Members',{
         //whether a user is an owner of the membership or a viewers [0:Owner , 1: Viewer]
         memberType: {
             type: DataTypes.INTEGER,
@@ -17,10 +17,11 @@ module.exports = function(sequelize, DataTypes) {
             foreignKey: models.Groups.id
         });
         //a membership has one group
-        Members.hasOne(models.Users,{
+        Members.belongsTo(models.Users,{
           foreignKey: models.Users.id
     });
     
-    return Members;
+    
     };
+    return Members;
 };
