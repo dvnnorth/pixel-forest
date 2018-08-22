@@ -3,7 +3,7 @@ $(function () {
     if (sessionStorage.getItem('token')) {
         $.ajax({
             method: 'GET',
-            url: '/group',
+            url: '/profile',
             async: true,
             headers: {
                 token: sessionStorage.getItem('token')
