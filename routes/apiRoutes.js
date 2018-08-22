@@ -12,8 +12,11 @@ module.exports = function (app, firebase, fbAdmin) {
     });
 
     // Create a new group
-    app.post('/group', function (req, res) {
+    app.post('/group/:email', function (req, res) {
         // Retrieve group name and image
+        db.Groups.findOne({
+            where: {email:req.params.email},
+        });
         // Upload image to storage
         // Get photo storage location
         // Insert new group data into groups table
@@ -39,6 +42,16 @@ module.exports = function (app, firebase, fbAdmin) {
     app.post('/login/signup', function (req, res) {
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
             .then(function () {
+                //Creating userEmail, fullname and owner: false to mySQL
+                db.Users.create({
+                    email:req.body.email,
+                    firstName:req.body.firstName,
+                    lastName:req.body.lastName,
+                    groupOwner:false
+                }).then(function(dbUsers){
+                    console.log('Inserted into MySQL: ');
+                    console.log(dbUsers);
+                });
                 sendUser(res);
             })
             .catch(function (error) {

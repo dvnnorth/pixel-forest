@@ -22,9 +22,15 @@ $(function () {
     function submitUserPass(endpoint) {
         // MAKE SURE TO PERFORM VALIDATION! Firebase is lenient!
         var userInfo = {
+            //sending to server: first, last names field values setting groupOwnership to false as default 
+            firstName: $('#inputFirstName').val().trim(),
+            lastName: $('#inputLastName').val().trim(),
+            groupOwner: false,
             email: $('#inputEmail').val().trim(),
-            password: $('#inputPassword').val().trim()
-        }
+            password: $('#inputPassword').val().trim(),
+        };
+        console.log('UserInfo captured from client');
+        console.log(userInfo);
         $.post(endpoint, userInfo, function (token) {
             console.log('setting token');
             sessionStorage.setItem('token', token);

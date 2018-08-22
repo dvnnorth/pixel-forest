@@ -50,6 +50,7 @@ module.exports = function (app, firebase, fbAdmin) {
                         // See the UserRecord reference doc for the contents of userRecord.
                         console.log("Successfully fetched user data:", userRecord.toJSON());
                         // Here we need to query the group to populate the page
+                        console.log(userRecord);
                         // Group ID should come in header (res.header('groupID') so its not exposed)
                         res.statusCode = 200;
                         res.render('group', { email: userRecord.email });

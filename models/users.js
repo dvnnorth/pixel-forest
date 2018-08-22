@@ -29,8 +29,6 @@ module.exports = function(sequelize, DataTypes) {
           groupOwner: {
             type:DataTypes.BOOLEAN,
             allowNull: false,
-            validate: {
-            }
           },
         }
     );
