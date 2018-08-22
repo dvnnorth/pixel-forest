@@ -37,12 +37,30 @@ module.exports = function (app, firebase, fbAdmin) {
 
     // Sign-up new user
     app.post('/login/signup', function (req, res) {
+        // Create user
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+            // On successful creation
             .then(function () {
-                sendUser(res);
+                let newUser = {
+                    email: req.body.email,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    groupOwner: false
+                };
+                // Create user entry in database
+                db.Users.create(newUser, {
+                    include: [db.Members, db.Posts]
+                })
+                    .then(function (dbUser) {
+                        // Call send user to send the token in the response, front end code handles redirect
+                        sendUser(res);
+                        // Log users object
+                        console.log('First Name: ', dbUser.firstName, 'Last Name', dbUser.lastName,
+                            'Email: ', dbUser.email);
+                    });
             })
+            // If creation fails
             .catch(function (error) {
-                console.log('error309480398');
                 res.statusCode = 401;
                 res.send(error);
             })
@@ -90,9 +108,8 @@ module.exports = function (app, firebase, fbAdmin) {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
             .then(function (idToken) {
                 res.statusCode = 200;
-                res.send(idToken)
+                res.send(idToken);
             }).catch(function (error) {
-                console.log('error238948');
                 res.statusCode = 401;
                 res.send(error);
             });

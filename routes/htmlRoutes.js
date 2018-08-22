@@ -31,12 +31,6 @@ module.exports = function (app, firebase, fbAdmin) {
 
     // Load profile page
     app.get('/profile', function (req, res) {
-        // Render and return home page
-
-    });
-
-    // Load group page
-    app.get('/group', function (req, res) {
         // Check if a token was sent with request. If not, then render 'redirect' which will handle pulling actual page
         // if the token is stored in sessionStorage, or will redirect to login if not
 
@@ -48,15 +42,49 @@ module.exports = function (app, firebase, fbAdmin) {
                 fbAdmin.auth().getUser(uid)
                     .then(function (userRecord) {
                         // See the UserRecord reference doc for the contents of userRecord.
-                        console.log("Successfully fetched user data:", userRecord.toJSON());
+                        console.log('Successfully fetched user data:', userRecord.toJSON());
                         // Here we need to query the group to populate the page
                         // Group ID should come in header (res.header('groupID') so its not exposed)
+
+                        // Query for posts to build the page
+                        db.Posts.findAll({
+                            where: {
+                                UserID: userRecord.email
+                            },
+                            include: [db.Users]
+                        })
+                            .then(function (data) {
+                                console.log(data);
+                            });
+
+                        // Render the group page with the needed information
                         res.statusCode = 200;
-                        res.render('group', { email: userRecord.email });
+                        res.render('profile', { email: userRecord.email });
                     })
                     .catch(function (error) {
                         console.log("Error fetching user data:", error);
                     });
+            }, function (error) {
+                // On auth failure
+                res.render('redirect');
+            });
+        }
+        else {
+            res.render('redirect');
+        }
+    });
+
+    // Load group page
+    app.get('/group', function (req, res) {
+        let token = req.header('token');
+
+        let requestedGroupID = req.header('groupID');
+
+        if (token) {
+            checkAuth(token, res, function (decodedToken) {
+                // On successful auth verification
+            }, function (error) {
+                res.render('redirect');
             });
         }
         else {
@@ -66,7 +94,21 @@ module.exports = function (app, firebase, fbAdmin) {
 
     // Load post page
     app.get('/profile/post', function (req, res) {
-        // Render and return home page
+
+        let token = req.header('token');
+
+        let requestedPostID = req.header('postID');
+
+        if (token) {
+            checkAuth(token, res, function (decodedToken) {
+                // On successful auth verification
+            }, function (error) {
+                res.render('redirect');
+            });
+        }
+        else {
+            res.render('redirect');
+        }
     });
 
     // Render 404 page for any unmatched routes

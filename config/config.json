@@ -1,15 +1,9 @@
 {
   "development": {
-<<<<<<< HEAD
-    "username": "sequelize",
-    "password": "wPz032UTHTUI85xReWB6",
-    "database": "exampledb",
-=======
-    "username": "root",
-    "password": "root",
+    "username": "dvnnorth",
+    "password": "***REMOVED***",
     "database": "sweetpeaDb",
->>>>>>> osmann
-    "host": "localhost",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
