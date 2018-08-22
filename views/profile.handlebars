@@ -1,10 +1,100 @@
-<h1>Profile</h1>
-<h2>You're logged in as {{email}}</h2>
+<nav class="navbar sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="./media/sweetPeaLogo.png" alt="sweetPeaLogo">
+        </a>
+        <input class="headerSearch ml-auto" type="text" name="search" placeholder="Search...">
+        <div class="dropdown">
+            <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fas fa-images"></i>
+                    Upload A Photo</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-certificate"></i> About Sweet Pea</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs"></i> Settings</a>
+            </div>
+        </div>
+        <p style="font-size: 0.75rem">{{email}}</p>
+        <i class="fas fa-user-circle"></i>
+    </div>
+</nav>
+<section id="popularPosts">
+    <div class="container group">
+        <h3>Popular Posts</h3>
+        <div class="cssGridThreeMax">
+            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,child,baby,infant" alt="random thumbnail">
+            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babysit,babies" alt="random thumbnail">
+            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babies" alt="random thumbnail">
+        </div>
+    </div>
+</section>
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-<script src="/js/script.js"></script>
+<section id="monthlyOverview">
+    <div id="m1Group" class="container group">
+        <h3>August - 2018</h3>
+        <div class="cssGridAutofill">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,playing" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,kids" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
+        </div>
+    </div>
+
+    <div class="container group">
+        <h3>July - 2018</h3>
+        <div class="cssGridAutofill">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,kids" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,daycare" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,smile" alt="random thumbnail">
+        </div>
+    </div>
+
+    <div class="container group">
+        <h3>June - 2018</h3>
+        <div class="cssGridAutofill">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?milk" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?child,infant" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children," alt="random thumbnail">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form action="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="upload">Upload:</label>
+                        <input id="upload" type="file">
+
+                        <label for="title">Title:</label>
+                        <input id="title" type="text">
+
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
