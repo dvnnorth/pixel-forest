@@ -9,30 +9,34 @@ $(function () {
         }
     });
 
-    $('#signUpSubmit').click(function (event) {
+    $('#signUpSubmit').on('click', function (event) {
         event.preventDefault();
-        submitUserPass('/login/signup');
+        // MAKE SURE TO PERFORM VALIDATION! Firebase is lenient!
+        var userInfo = {
+            firstName: $('#firstName').val().trim(),
+            lastName: $('#lastName').val().trim(),
+            email: $('#inputEmail').val().trim(),
+            password: $('#inputPassword').val().trim()
+        }
+        submitUserPass('/login/signup', userInfo);
     });
 
-    $('#signInSubmit').click(function (event) {
+    $('#signInSubmit').on('click', function (event) {
         event.preventDefault();
-        submitUserPass('/login');
-    });
-
-    function submitUserPass(endpoint) {
         // MAKE SURE TO PERFORM VALIDATION! Firebase is lenient!
         var userInfo = {
             email: $('#inputEmail').val().trim(),
             password: $('#inputPassword').val().trim()
         }
-        $.post(endpoint, userInfo, function (token) {
-            console.log('setting token');
+        submitUserPass('/login', userInfo);
+    });
+
+    function submitUserPass(endpoint, data) {
+        $.post(endpoint, data, function (token) {
             sessionStorage.setItem('token', token);
-            console.log('redirecting');
-            window.location.replace('/group');
+            window.location.replace('/profile');
         })
             .fail(function (response) {
-                console.log('catching an error');
                 loginError(response);
             });
     }
