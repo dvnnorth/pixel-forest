@@ -47,19 +47,19 @@ module.exports = function (app, firebase, fbAdmin) {
 
                         // Query for posts to build the page
 
-                        db.Users.findOne({
+                        // db.Users.findOne({
 
-                        })
+                        // });
 
-                        db.Members.findAll({
-                            where: {
-                                user: 
-                            },
-                            include: [db.Users]
-                        })
-                            .then(function (data) {
-                                console.log(data);
-                            });
+                        // db.Members.findAll({
+                        //     where: {
+                        //         user
+                        //     },
+                        //     include: [db.Users]
+                        // })
+                        //     .then(function (data) {
+                        //         console.log(data);
+                        //     });
 
                         // Render the group page with the needed information
                         res.statusCode = 200;
