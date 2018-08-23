@@ -6,7 +6,8 @@ $(function () {
             url: '/profile',
             async: true,
             headers: {
-                token: sessionStorage.getItem('token')
+                token: sessionStorage.getItem('token'),
+                id: sessionStorage.getItem('id')
             }
         })
             .then(function (response) {
