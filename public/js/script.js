@@ -32,8 +32,9 @@ $(function () {
     });
 
     function submitUserPass(endpoint, data) {
-        $.post(endpoint, data, function (token) {
-            sessionStorage.setItem('token', token);
+        $.post(endpoint, data, function (userInfo) {
+            sessionStorage.setItem('token', userInfo.token);
+            sessionStorage.setItem('id', userInfo.id);
             window.location.replace('/profile');
         })
             .fail(function (response) {

@@ -44,12 +44,16 @@ module.exports = function (app, firebase, fbAdmin) {
                         // See the UserRecord reference doc for the contents of userRecord.
                         console.log('Successfully fetched user data:', userRecord.toJSON());
                         // Here we need to query the group to populate the page
-                        // Group ID should come in header (res.header('groupID') so its not exposed)
 
                         // Query for posts to build the page
-                        db.Posts.findAll({
+
+                        db.Users.findOne({
+
+                        })
+
+                        db.Members.findAll({
                             where: {
-                                UserID: userRecord.email
+                                user: 
                             },
                             include: [db.Users]
                         })

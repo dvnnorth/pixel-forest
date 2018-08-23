@@ -25,14 +25,30 @@ module.exports = function (app, firebase, fbAdmin) {
         // Sign In User
         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
             .then(function () {
+                console.log('user email: ', req.body.email);
                 // If successful, get token then send token to client for session storage
-                sendUser(res);
+                db.Users.findOne({
+                    where: {
+                        email: req.body.email
+                    }
+                })
+                    .then(function (dbUser) {
+                        if (!dbUser) {
+                            throw new Error('User doesn\'t exist');
+                        }
+                        console.log('dbUser: ', dbUser);
+                        sendUser(res, dbUser.id);
+                    })
+                    .catch(function (error) {
+                        res.send({ code: 'auth/invalid-email', message: error.toString() });
+                    });
             })
             // Sign in errors
             .catch(function (error) {
+                console.log('firebase error');
                 res.statusCode = 401;
                 res.send(error);
-            })
+            });
     });
 
     // Sign-up new user
@@ -53,7 +69,8 @@ module.exports = function (app, firebase, fbAdmin) {
                 })
                     .then(function (dbUser) {
                         // Call send user to send the token in the response, front end code handles redirect
-                        sendUser(res);
+                        console.log('dbUser: ', dbUser);
+                        sendUser(res, dbUser.id);
                         // Log users object
                         console.log('First Name: ', dbUser.firstName, 'Last Name', dbUser.lastName,
                             'Email: ', dbUser.email);
@@ -104,11 +121,14 @@ module.exports = function (app, firebase, fbAdmin) {
         // Return 200 if successful
     });
 
-    function sendUser(res) {
+    function sendUser(res, userID) {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
             .then(function (idToken) {
                 res.statusCode = 200;
-                res.send(idToken);
+                res.send({
+                    id: userID,
+                    token: idToken
+                });
             }).catch(function (error) {
                 res.statusCode = 401;
                 res.send(error);
