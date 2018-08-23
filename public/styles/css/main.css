@@ -97,6 +97,10 @@ h6 {
 .group h3 {
   color: #1d1d1d;
   padding: 3.4rem 0 1rem 0; }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7c47a1244679eca4e30cd8d85cfb141e4ed104ef
 .group img {
   box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.5);
   border: 0.0625rem solid rgba(255, 255, 255, 0.5); }
@@ -123,6 +127,7 @@ h6 {
   .footer h6 {
     color: #1d1d1d; }
 
+<<<<<<< HEAD
 .btn-neon-green {
   background-color: #00FF00; }
 
@@ -164,6 +169,8 @@ h6 {
   border-top-left-radius: 0;
   border-top-right-radius: 0; }
 
+=======
+>>>>>>> 7c47a1244679eca4e30cd8d85cfb141e4ed104ef
 #exampleModalCenter {
   color: #FEFEFE; }
   #exampleModalCenter .modal-body {
@@ -182,5 +189,8 @@ h6 {
     background: #1d1d1d; }
   #exampleModalCenter .modal-footer {
     background: #1d1d1d; }
+<<<<<<< HEAD
 
 /*# sourceMappingURL=main.css.map */
+=======
+>>>>>>> 7c47a1244679eca4e30cd8d85cfb141e4ed104ef
