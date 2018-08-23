@@ -32,10 +32,6 @@ module.exports = function (sequelize, DataTypes) {
         Posts.belongsTo(models.Users, {
             foreignKey: models.Users.id
         });
-        //a post is only displaying in one specific group
-        Posts.belongsTo(models.Groups, {
-            foreignKey: models.Groups.id
-        });
-    }
+    };
     return Posts;
 }
