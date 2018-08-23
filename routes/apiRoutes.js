@@ -1,24 +1,137 @@
-var db = require("../models");
+const db = require('../models');
 
-module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
-  });
+module.exports = function (app, firebase, fbAdmin) {
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+    // Create a new post
+    app.post('/profile/post', function (req, res) {
+        // Retrieve image and post data from request
+        // Upload image to storage (encrypt?)
+        // Get photo cloud storage location
+        // Insert new post into posts table
+        // Render/return new post page in response
     });
-  });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+    // Create a new group
+    app.post('/group', function (req, res) {
+        // Retrieve group name and image
+        // Upload image to storage
+        // Get photo storage location
+        // Insert new group data into groups table
+        // render/return new group page
     });
-  });
+
+    // Log-in user
+    app.post('/login', function (req, res) {
+        // Sign In User
+        firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+            .then(function () {
+                console.log('user email: ', req.body.email);
+                // If successful, get token then send token to client for session storage
+                db.Users.findOne({
+                    where: {
+                        email: req.body.email
+                    }
+                })
+                    .then(function (dbUser) {
+                        if (!dbUser) {
+                            throw new Error('User doesn\'t exist');
+                        }
+                        console.log('dbUser: ', dbUser);
+                        sendUser(res, dbUser.id);
+                    })
+                    .catch(function (error) {
+                        res.send({ code: 'auth/invalid-email', message: error.toString() });
+                    });
+            })
+            // Sign in errors
+            .catch(function (error) {
+                console.log('firebase error');
+                res.statusCode = 401;
+                res.send(error);
+            });
+    });
+
+    // Sign-up new user
+    app.post('/login/signup', function (req, res) {
+        // Create user
+        firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+            // On successful creation
+            .then(function () {
+                let newUser = {
+                    email: req.body.email,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    groupOwner: false
+                };
+                // Create user entry in database
+                db.Users.create(newUser, {
+                    include: [db.Members, db.Posts]
+                })
+                    .then(function (dbUser) {
+                        // Call send user to send the token in the response, front end code handles redirect
+                        console.log('dbUser: ', dbUser);
+                        sendUser(res, dbUser.id);
+                        // Log users object
+                        console.log('First Name: ', dbUser.firstName, 'Last Name', dbUser.lastName,
+                            'Email: ', dbUser.email);
+                    });
+            })
+            // If creation fails
+            .catch(function (error) {
+                res.statusCode = 401;
+                res.send(error);
+            })
+    });
+
+    // Log a user out
+    app.post('/logout', function (req, res) {
+
+    });
+
+    // Update a post
+    app.put('/profile/post', function (req, res) {
+        // Grab data to be updated
+        // Update columns for post in posts table
+        // render/return updated post page
+    });
+
+    // Edit group permissions
+    app.put('/group', function (req, res) {
+
+    });
+
+    // Delete a post
+    app.delete('/profile/post', function (req, res) {
+        // Get post ID from request
+        // Delete image from hosting
+        // Remove entry from table
+        // Return 200 if successful
+        // Or redirect to profile page with message?
+    });
+
+    // Delete account
+    app.delete('/profile', function (req, res) {
+        // After front end handles confirmation
+        // Get profile information from request
+        // Delete all posts associated with profile
+        //   Same procedure as post delete route for 
+        //   all relevant posts
+        // Delete group associated with profile
+        // Delete profile
+        // Return 200 if successful
+    });
+
+    function sendUser(res, userID) {
+        firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
+            .then(function (idToken) {
+                res.statusCode = 200;
+                res.send({
+                    id: userID,
+                    token: idToken
+                });
+            }).catch(function (error) {
+                res.statusCode = 401;
+                res.send(error);
+            });
+    }
 };

@@ -62,3 +62,6 @@ typings/
 
 # next.js build output
 .next
+
+# Firebase admin config file
+admin/
