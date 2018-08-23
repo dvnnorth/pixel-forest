@@ -11,12 +11,29 @@ module.exports = function (app, firebase, fbAdmin) {
         // Render/return new post page in response
     });
 
-    // Create a new group
-    app.post('/group/:email', function (req, res) {
+    // Create a new group:
+    //Update users.groupOwner: true where email is /group/:email and grab the 
+    //.then {create group with groupName & PhotoUrl} > example output: id:2
+    //.then { create membership setting the userId column to users.id }
+    //
+    app.post('/group/:id', function (req, res) {
+        // db.Groups.create({
+        //     groupName:'Robin Williams Fans',
+        //     groupPhoto: 'https://naqyr37xcg93tizq734pqsx1-wpengine.netdna-ssl.com/wp-content/uploads/2014/08/Robin-Williams.jpg',
+        //     include:[
+        //         {model:db.Members,
+        //             include: [
+        //                 {model:db.Users}
+        //             ]}
+        //     ]
+        // }).then(function(newGroup){
+        //     const resObj = newGroup.map(function(group){
+        //         return Object.assign({},{
+
+        //         })
+        //     })
+        // });
         // Retrieve group name and image
-        db.Groups.findOne({
-            where: {email:req.params.email},
-        });
         // Upload image to storage
         // Get photo storage location
         // Insert new group data into groups table
@@ -35,22 +52,27 @@ module.exports = function (app, firebase, fbAdmin) {
             .catch(function (error) {
                 res.statusCode = 401;
                 res.send(error);
-            })
+            });
     });
 
     // Sign-up new user
     app.post('/login/signup', function (req, res) {
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
             .then(function () {
+                
+                console.log(req.body.email);
                 //Creating userEmail, fullname and owner: false to mySQL
                 db.Users.create({
                     email:req.body.email,
                     firstName:req.body.firstName,
                     lastName:req.body.lastName,
                     groupOwner:false
-                }).then(function(dbUsers){
+                }).then(function(dbUser){
+                    
                     console.log('Inserted into MySQL: ');
-                    console.log(dbUsers);
+                    console.log('dbuserId',dbUser.id);
+                    console.log('sending id to client');
+                    
                 });
                 sendUser(res);
             })
@@ -58,7 +80,7 @@ module.exports = function (app, firebase, fbAdmin) {
                 console.log('error309480398');
                 res.statusCode = 401;
                 res.send(error);
-            })
+            });
     });
 
     // Log a user out
@@ -103,7 +125,7 @@ module.exports = function (app, firebase, fbAdmin) {
         firebase.auth().currentUser.getIdToken(/* forceRefresh */ true)
             .then(function (idToken) {
                 res.statusCode = 200;
-                res.send(idToken)
+                res.send(idToken);
             }).catch(function (error) {
                 console.log('error238948');
                 res.statusCode = 401;

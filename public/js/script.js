@@ -35,14 +35,14 @@ $(function () {
             console.log('setting token');
             sessionStorage.setItem('token', token);
             console.log('redirecting');
-            window.location.replace('/group');
+            console.log(token);
+            window.location.replace('/group/'); 
         })
             .fail(function (response) {
                 console.log('catching an error');
                 loginError(response);
             });
     }
-
     function loginError(response) {
         $("#errorMessage").text(response.responseJSON.message);
         $("#errorBlock").removeClass("d-none");

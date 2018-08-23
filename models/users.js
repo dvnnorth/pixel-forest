@@ -5,9 +5,9 @@ module.exports = function(sequelize, DataTypes) {
         email: {
             type:DataTypes.STRING,
             allowNull: false,
-            validate: {
-              isEmail: true,
-            }
+            // validate: {
+            //   isEmail: true,
+            // }
           },
           //First name no longer than 20
           firstName: {

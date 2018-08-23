@@ -36,12 +36,11 @@ module.exports = function (app, firebase, fbAdmin) {
     });
 
     // Load group page
-    app.get('/group', function (req, res) {
+    app.get('/group/:id', function (req, res) {
         // Check if a token was sent with request. If not, then render 'redirect' which will handle pulling actual page
         // if the token is stored in sessionStorage, or will redirect to login if not
 
         let token = req.header('token');
-
         if (token) {
             checkAuth(token, res, function (decodedToken) {
                 let uid = decodedToken.uid;
@@ -50,7 +49,13 @@ module.exports = function (app, firebase, fbAdmin) {
                         // See the UserRecord reference doc for the contents of userRecord.
                         console.log("Successfully fetched user data:", userRecord.toJSON());
                         // Here we need to query the group to populate the page
-                        console.log(userRecord);
+                        // const fEmail = userRecord.email;
+                        // db.Users.findOne({
+                        //     email: fEmail,
+                        // }).then(function(dbUser){
+                        //     console.log('Group_dbUser:',dbUser);
+                        // });
+                        
                         // Group ID should come in header (res.header('groupID') so its not exposed)
                         res.statusCode = 200;
                         res.render('group', { email: userRecord.email });
