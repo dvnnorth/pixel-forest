@@ -2,8 +2,14 @@ const db = require('../models');
 
 module.exports = function (app, firebase, fbAdmin) {
 
+    // Get a post
+    app.get('/api/profile/post/:id' function (req, res) {
+        // Get a post from the database, return the object needed to insert the post into the modal
+    });
+
+
     // Create a new post
-    app.post('/profile/post', function (req, res) {
+    app.post('/api/profile/post', function (req, res) {
         // Retrieve image and post data from request
         // Upload image to storage (encrypt?)
         // Get photo cloud storage location
@@ -11,37 +17,30 @@ module.exports = function (app, firebase, fbAdmin) {
         // Render/return new post page in response
     });
 
-    // Create a new group
-    app.post('/group', function (req, res) {
-        // Retrieve group name and image
-        // Upload image to storage
-        // Get photo storage location
-        // Insert new group data into groups table
-        // render/return new group page
-    });
-
     // Log-in user
-    app.post('/login', function (req, res) {
+    app.post('/api/login', function (req, res) {
         // Sign In User
         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
             .then(function () {
                 console.log('user email: ', req.body.email);
                 let uid = firebase.auth().currentUser.uid;
                 // If successful, get token then send token to client for session storage
-                db.Users.findOne({
+                db.Users.findOrCreate({
                     where: {
                         email: req.body.email
+                    },
+                    defaults: {
+                        email: req.body.email,
+                        firstName: req.body.firstName || req.body.email,
+                        lastName: req.body.lastName || req.body.email,
+                        groupOwner: false
                     }
                 })
-                    .then(function (dbUser) {
-                        if (dbUser) {
-                            console.log('dbUser: ', dbUser);
-                            sendUser(res, dbUser.id);
-                        }
-                        else {
-                            res.send({ code: 'auth/invalid-email', message: 'User does not exist in database' });
-                        }
-
+                    .then(function (result) {
+                        let dbUser = result[0];
+                        let created = result[1];
+                        if (created) console.log('Created new user entry');
+                        sendUser(res, dbUser.id);
                     });
             })
             // Sign in errors
@@ -53,7 +52,7 @@ module.exports = function (app, firebase, fbAdmin) {
     });
 
     // Sign-up new user
-    app.post('/login/signup', function (req, res) {
+    app.post('/api/login/signup', function (req, res) {
         // Create user
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
             // On successful creation
@@ -84,25 +83,26 @@ module.exports = function (app, firebase, fbAdmin) {
             })
     });
 
+    // Share a profile
+    app.post('/api/share', function (req, res) {
+        // Create a new Viewer
+        // Generate and send email to Viewer
+    });
+
     // Log a user out
-    app.post('/logout', function (req, res) {
+    app.post('/api/logout', function (req, res) {
 
     });
 
     // Update a post
-    app.put('/profile/post', function (req, res) {
+    app.put('/api/profile/post', function (req, res) {
         // Grab data to be updated
         // Update columns for post in posts table
         // render/return updated post page
     });
 
-    // Edit group permissions
-    app.put('/group', function (req, res) {
-
-    });
-
     // Delete a post
-    app.delete('/profile/post', function (req, res) {
+    app.delete('/api/profile/post', function (req, res) {
         // Get post ID from request
         // Delete image from hosting
         // Remove entry from table
@@ -111,7 +111,7 @@ module.exports = function (app, firebase, fbAdmin) {
     });
 
     // Delete account
-    app.delete('/profile', function (req, res) {
+    app.delete('/api/profile', function (req, res) {
         // After front end handles confirmation
         // Get profile information from request
         // Delete all posts associated with profile

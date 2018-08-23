@@ -35,6 +35,7 @@ module.exports = function (app, firebase, fbAdmin) {
         // if the token is stored in sessionStorage, or will redirect to login if not
 
         let token = req.header('token');
+        let userID = req.header('id');
 
         if (token) {
             checkAuth(token, res, function (decodedToken) {
@@ -47,23 +48,28 @@ module.exports = function (app, firebase, fbAdmin) {
 
                         // Query for posts to build the page
 
-                        // db.Users.findOne({
-
-                        // });
-
-                        // db.Members.findAll({
-                        //     where: {
-                        //         user
-                        //     },
-                        //     include: [db.Users]
-                        // })
-                        //     .then(function (data) {
-                        //         console.log(data);
-                        //     });
-
-                        // Render the group page with the needed information
-                        res.statusCode = 200;
-                        res.render('profile', { email: userRecord.email });
+                        db.Users.findOne({
+                            where: {
+                                id: userID
+                            }
+                        })
+                            .then(function (user) {
+                                db.Posts.findAll(
+                                    {
+                                        where: {
+                                            UserId: user.id
+                                        }
+                                    },
+                                    {
+                                        include: [db.Users]
+                                    }
+                                )
+                                    .then(function (posts) {
+                                        console.log(posts);
+                                        posts.email = userRecord.email;
+                                        res.render('profile', posts);
+                                    });
+                            });
                     })
                     .catch(function (error) {
                         console.log("Error fetching user data:", error);
@@ -78,41 +84,44 @@ module.exports = function (app, firebase, fbAdmin) {
         }
     });
 
-    // Load group page
-    app.get('/group', function (req, res) {
-        let token = req.header('token');
-
-        let requestedGroupID = req.header('groupID');
-
-        if (token) {
-            checkAuth(token, res, function (decodedToken) {
-                // On successful auth verification
-            }, function (error) {
-                res.render('redirect');
+    app.get('/share/:token', function (req, res) {
+        // Get the User a Viewer can see
+        // Render their profile page without post functionality
+        db.Viewers.findOne(
+            {
+                where: {
+                    accessToken: req.params.token
+                }
+            }
+        )
+            .then(function (viewer) {
+                db.Users.findOne(
+                    {
+                        where: {
+                            id: viewer.UserId
+                        }
+                    },
+                    {
+                        include: [db.Users]
+                    }
+                )
+                    .then(function (user) {
+                        db.Posts.findAll(
+                            {
+                                where: {
+                                    UserId: user.id
+                                }
+                            },
+                            {
+                                include: [db.Users]
+                            }
+                        )
+                            .then(function (posts) {
+                                console.log(posts);
+                                res.render('share', posts);
+                            });
+                    });
             });
-        }
-        else {
-            res.render('redirect');
-        }
-    });
-
-    // Load post page
-    app.get('/profile/post', function (req, res) {
-
-        let token = req.header('token');
-
-        let requestedPostID = req.header('postID');
-
-        if (token) {
-            checkAuth(token, res, function (decodedToken) {
-                // On successful auth verification
-            }, function (error) {
-                res.render('redirect');
-            });
-        }
-        else {
-            res.render('redirect');
-        }
     });
 
     // Render 404 page for any unmatched routes

@@ -36,8 +36,6 @@ module.exports = function (sequelize, DataTypes) {
     );
     Users.associate = function (models) {
         //A user can have many membership
-        Users.hasMany(models.Members);
-        //A user can have many membership
         Users.hasMany(models.Posts);
     };
     return Users;
