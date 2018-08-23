@@ -26,6 +26,7 @@ module.exports = function (app, firebase, fbAdmin) {
         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
             .then(function () {
                 console.log('user email: ', req.body.email);
+                let uid = firebase.auth().currentUser.uid;
                 // If successful, get token then send token to client for session storage
                 db.Users.findOne({
                     where: {
@@ -33,14 +34,14 @@ module.exports = function (app, firebase, fbAdmin) {
                     }
                 })
                     .then(function (dbUser) {
-                        if (!dbUser) {
-                            throw new Error('User doesn\'t exist');
+                        if (dbUser) {
+                            console.log('dbUser: ', dbUser);
+                            sendUser(res, dbUser.id);
                         }
-                        console.log('dbUser: ', dbUser);
-                        sendUser(res, dbUser.id);
-                    })
-                    .catch(function (error) {
-                        res.send({ code: 'auth/invalid-email', message: error.toString() });
+                        else {
+                            res.send({ code: 'auth/invalid-email', message: 'User does not exist in database' });
+                        }
+
                     });
             })
             // Sign in errors
