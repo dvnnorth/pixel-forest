@@ -1,4 +1,8 @@
 const db = require('../models');
+const sharp = require('sharp');
+const request = require('request').defaults({
+    encoding: null
+});
 
 module.exports = function (app, firebase, fbAdmin) {
 
@@ -56,6 +60,36 @@ module.exports = function (app, firebase, fbAdmin) {
         // Get photo cloud storage location
         // Insert new post into posts table
         // Render/return new post page in response
+
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+            
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        
+                        db.Posts.create(req.body)
+                            .then(function (postEntry) {
+                                res.statusCode = 200;
+                                res.send(postEntry);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
+    });
+
+    app.post('/sharp', function (req, res) {
+        var imgUrl = req.body.url;
     });
 
     // Log-in user

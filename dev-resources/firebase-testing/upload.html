@@ -27,8 +27,8 @@
 
 <body>
     <form>
-        <h5>Upload and Image</h5>
-        <input name="file" type="file" id="fileButton" class="form-control-file pl-3" accept=".jpg" multiple="true" />
+        <h5>Upload an Image</h5>
+        <input name="file" type="file" id="fileButton" class="form-control-file pl-3" accept=".jpg" multiple="false" />
 
         <div class="uploadOutterBox pl-3 pt-2">
             <div id="preview" class="uploadInnerBox">
@@ -47,8 +47,9 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-    <script src="firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-storage.js"></script>
+    <script src="./firebase.js"></script>
 </body>
 
 </html>
