@@ -2,8 +2,49 @@ const db = require('../models');
 
 module.exports = function (app, firebase, fbAdmin) {
 
+    app.get('/api/profile/content', function (req, res) {
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        db.Users.findOne({
+                            where: {
+                                id: userID
+                            }
+                        })
+                            .then(function (user) {
+                                db.Posts.findAll(
+                                    {
+                                        where: {
+                                            UserId: user.id
+                                        }
+                                    },
+                                    {
+                                        include: [db.Users]
+                                    }
+                                )
+                                    .then(function (posts) {
+                                        res.send(posts);
+                                    });
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
+    });
+
     // Get a post
-    app.get('/api/profile/post/:id' function (req, res) {
+    app.get('/api/profile/post/:id', function (req, res) {
         // Get a post from the database, return the object needed to insert the post into the modal
     });
 
@@ -32,8 +73,7 @@ module.exports = function (app, firebase, fbAdmin) {
                     defaults: {
                         email: req.body.email,
                         firstName: req.body.firstName || req.body.email,
-                        lastName: req.body.lastName || req.body.email,
-                        groupOwner: false
+                        lastName: req.body.lastName || req.body.email
                     }
                 })
                     .then(function (result) {
@@ -60,12 +100,11 @@ module.exports = function (app, firebase, fbAdmin) {
                 let newUser = {
                     email: req.body.email,
                     firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    groupOwner: false
+                    lastName: req.body.lastName
                 };
                 // Create user entry in database
                 db.Users.create(newUser, {
-                    include: [db.Members, db.Posts]
+                    include: [db.Posts]
                 })
                     .then(function (dbUser) {
                         // Call send user to send the token in the response, front end code handles redirect
@@ -131,6 +170,17 @@ module.exports = function (app, firebase, fbAdmin) {
                     token: idToken
                 });
             }).catch(function (error) {
+                res.statusCode = 401;
+                res.send(error);
+            });
+    }
+
+    function checkAuth(token, res, onSuccess, onFailure) {
+        fbAdmin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                onSuccess(decodedToken);
+            }).catch(function (error) {
+                if (onFailure) onFailure(error);
                 res.statusCode = 401;
                 res.send(error);
             });

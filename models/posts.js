@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [1, 500]
             }
-        },
+        }
     });
     Posts.associate = function (models) {
         //post must belong to a user

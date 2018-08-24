@@ -34,54 +34,55 @@ module.exports = function (app, firebase, fbAdmin) {
         // Check if a token was sent with request. If not, then render 'redirect' which will handle pulling actual page
         // if the token is stored in sessionStorage, or will redirect to login if not
 
-        let token = req.header('token');
-        let userID = req.header('id');
+        res.render('profile');
+        // let token = req.header('token');
+        // let userID = req.header('id');
 
-        if (token) {
-            checkAuth(token, res, function (decodedToken) {
-                let uid = decodedToken.uid;
-                fbAdmin.auth().getUser(uid)
-                    .then(function (userRecord) {
-                        // See the UserRecord reference doc for the contents of userRecord.
-                        console.log('Successfully fetched user data:', userRecord.toJSON());
-                        // Here we need to query the group to populate the page
+        // if (token) {
+        //     checkAuth(token, res, function (decodedToken) {
+        //         let uid = decodedToken.uid;
+        //         fbAdmin.auth().getUser(uid)
+        //             .then(function (userRecord) {
+        //                 // See the UserRecord reference doc for the contents of userRecord.
+        //                 console.log('Successfully fetched user data:', userRecord.toJSON());
+        //                 // Here we need to query the group to populate the page
 
-                        // Query for posts to build the page
+        //                 // Query for posts to build the page
 
-                        db.Users.findOne({
-                            where: {
-                                id: userID
-                            }
-                        })
-                            .then(function (user) {
-                                db.Posts.findAll(
-                                    {
-                                        where: {
-                                            UserId: user.id
-                                        }
-                                    },
-                                    {
-                                        include: [db.Users]
-                                    }
-                                )
-                                    .then(function (posts) {
-                                        console.log(posts);
-                                        posts.email = userRecord.email;
-                                        res.render('profile', posts);
-                                    });
-                            });
-                    })
-                    .catch(function (error) {
-                        console.log("Error fetching user data:", error);
-                    });
-            }, function (error) {
-                // On auth failure
-                res.render('redirect');
-            });
-        }
-        else {
-            res.render('redirect');
-        }
+        //                 db.Users.findOne({
+        //                     where: {
+        //                         id: userID
+        //                     }
+        //                 })
+        //                     .then(function (user) {
+        //                         db.Posts.findAll(
+        //                             {
+        //                                 where: {
+        //                                     UserId: user.id
+        //                                 }
+        //                             },
+        //                             {
+        //                                 include: [db.Users]
+        //                             }
+        //                         )
+        //                             .then(function (posts) {
+        //                                 console.log(posts);
+        //                                 posts.email = userRecord.email;
+        //                                 res.render('profile', posts);
+        //                             });
+        //                     });
+        //             })
+        //             .catch(function (error) {
+        //                 console.log("Error fetching user data:", error);
+        //             });
+        //     }, function (error) {
+        //         // On auth failure
+        //         res.render('redirect');
+        //     });
+        // }
+        // else {
+        //     res.render('redirect');
+        // }
     });
 
     app.get('/share/:token', function (req, res) {
