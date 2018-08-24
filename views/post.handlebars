@@ -1,0 +1,46 @@
+<nav class="navbar sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="./media/sweetPeaLogo.png" alt="sweetPeaLogo">
+        </a>
+        <input class="headerSearch ml-auto" type="text" name="search" placeholder="Search...">
+        <div class="dropdown">
+            <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a id="displayUploadModal" class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                    <i class="fas fa-images"></i>
+                    Upload A Photo</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-certificate"></i> About Sweet Pea</a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs"></i> Settings</a>
+            </div>
+        </div>
+        <i class="fas fa-user-circle"></i>
+    </div>
+</nav>
+
+<form>
+    <h5>Upload an Image</h5>
+    <input name="file" type="file" id="fileButton" class="form-control-file pl-3" accept=".jpg" multiple="false" />
+
+    <div class="uploadOutterBox pl-3 pt-2">
+        <div id="preview" class="uploadInnerBox">
+
+        </div>
+    </div>
+
+    <label for="title">Title:</label>
+    <input id="postTitle" type="text">
+
+    <label for="description">Description:</label>
+    <textarea id="postBody" name="description" cols="30" rows="10"></textarea>
+
+    <input class="d-none" id="postSubmit" type="submit">
+</form>
+
+<script>
+    let script = document.createElement("script");
+    script.setAttribute("src", "/js/post.js");
+    document.body.appendChild(script);
+</script>

@@ -7,7 +7,7 @@
         <div class="dropdown">
             <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter">
+                <a id="displayUploadModal" class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter">
                     <i class="fas fa-images"></i>
                     Upload A Photo</a>
                 <a class="dropdown-item" href="#">
@@ -20,83 +20,51 @@
         <i class="fas fa-user-circle"></i>
     </div>
 </nav>
+
 <section id="popularPosts">
     <div class="container group">
-        <h3>Popular Posts</h3>
-        <div class="cssGridThreeMax">
-            {{!-- <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,child,baby,infant" alt="random thumbnail">
-            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babysit,babies" alt="random thumbnail">
-            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babies" alt="random thumbnail"> --}}
+        <h3>Photos</h3>
+        <div class="cssGridThreeMax" id="postsDiv">
+            <!-- Inserting photos here -->
         </div>
     </div>
 </section>
 
-<section id="monthlyOverview">
-    <div id="m1Group" class="container group">
-        <h3>August - 2018</h3>
-        <div class="cssGridAutofill">
-            {{!-- <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,playing" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,kids" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail"> --}}
+<footer class="footer">
+    <div class="container">
+        <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="file">Upload:</label>
+                    <input name="file" type="file" id="fileButton" class="form-control-file pl-3" accept=".jpg" multiple="false" />
+
+                    <label for="title">Title:</label>
+                    <input id="postTitle" type="text">
+
+                    <label for="description">Description:</label>
+                    <textarea id="postBody" name="description" cols="30" rows="10"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" id="postSubmit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <div class="container group">
-        <h3>July - 2018</h3>
-        <div class="cssGridAutofill">
-            {{!-- <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,kids" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,daycare" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,smile" alt="random thumbnail"> --}}
-        </div>
-    </div>
-
-    <div class="container group">
-        <h3>June - 2018</h3>
-        <div class="cssGridAutofill">
-            {{!-- <img height="260" width="260" src="https://source.unsplash.com/1600x900/?milk" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?child,infant" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children," alt="random thumbnail"> --}}
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
-        </div>
-    </footer>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <form>
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="upload">Upload:</label>
-                        <input id="postFile" type="file">
-
-                        <label for="title">Title:</label>
-                        <input id="postTitle" type="text">
-
-                        <label for="description">Description:</label>
-                        <textarea id="postBody" name="description" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="postSubmit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+</div>
 </section>
 
 <script>

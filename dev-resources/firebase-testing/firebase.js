@@ -1,17 +1,16 @@
 // Initialize Firebase
 var config = {
-    apiKey: 'AIzaSyA5HknkMo8e56CNztoVH6jp86m9sr59xZA',
-    authDomain: 'homeinventory-3125f.firebaseapp.com',
-    databaseURL: 'https://homeinventory-3125f.firebaseio.com',
-    projectId: 'homeinventory-3125f',
-    storageBucket: 'homeinventory-3125f.appspot.com',
-    messagingSenderId: '714473599175'
+    apiKey: "AIzaSyA6FqIL02M3IGmtfWPNFdXTV8Aw_FIY6ZQ",
+    authDomain: "sweetpea-74522.firebaseapp.com",
+    databaseURL: "https://sweetpea-74522.firebaseio.com",
+    projectId: "sweetpea-74522",
+    storageBucket: "sweetpea-74522.appspot.com",
+    messagingSenderId: "1006334747003"
 };
 firebase.initializeApp(config);
 
 
 // Global Variables
-let fbDB = firebase.database();
 let $imgs = '';
 let downloadURLs = [];
 
@@ -20,7 +19,16 @@ let downloadURLs = [];
 // Handle waiting to upload each file using promise
 function uploadImageAsPromise(imageFile) {
     return new Promise(function (resolve, reject) {
-        var storageRef = firebase.storage().ref(imageFile.name);
+        let fName = imageFile.name;
+
+        let fExtension = imageFile.name.split('?', 1);
+        fExtension = fExtension[0].toString();
+        fExtension = fExtension.substr(fExtension.length - 4);
+
+        fName = generateUUID();
+        let fileName = fName + fExtension;
+
+        var storageRef = firebase.storage().ref(fileName);
 
         // Upload file
         var task = storageRef.put(imageFile);
@@ -39,7 +47,6 @@ function uploadImageAsPromise(imageFile) {
                     downloadURLs.push(downloadURL);
 
                     downloadURLs.forEach(element => {
-
                         let fExtension = element.split('?', 1);
                         fExtension = fExtension[0].toString();
                         fExtension = fExtension.substr(fExtension.length - 3);
@@ -51,13 +58,26 @@ function uploadImageAsPromise(imageFile) {
                         }
 
                     });
-                    console.log(downloadURLs)
+                    // console.log(downloadURLs);
                     $('#preview').html($imgs);
                     downloadURLs = [];
                 });
             });
     });
 }
+
+function generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+        d += performance.now(); //use high-precision timer if available
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
+
 
 // Listen for file selection
 $(document).on('change', '#fileButton', function (e) {
