@@ -21,7 +21,7 @@ $(function () {
                 id: sessionStorage.getItem('id')
             }
         })
-            .then(function (response) {
+            .then(function (content) {
                 // Render the page
                 // Execute page scripts
                 
