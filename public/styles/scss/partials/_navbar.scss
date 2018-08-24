@@ -1,0 +1,93 @@
+.navbar {
+    background: #ECE9E6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #FFFFFF, #ECE9E6);
+    height: rem(62px); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+    a {
+        color: $white;
+        font-size: rem(16px);
+    }
+
+    i {
+        width: rem(15px);
+        height: rem(15px);
+        color: $black;
+        opacity: .6;
+        margin-left: rem(14px);
+
+        &:hover {
+            opacity: 1;
+            transition: .2s ease-out;
+        }
+    }
+
+    .headerSearch {
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        width: rem(100px);
+        height: rem(28px);
+        margin: 0;
+        padding: rem(5px) rem(12px) rem(6px);
+        background-color: $white;
+        color: #fff;
+        border: 1px solid rgba(0,0,0,.9);
+        box-shadow: 0 rem(1px) 0 rgba(255,255,255,.04);
+        outline: 0;
+        border-radius: rem(50px);
+        opacity: .6;
+        transition: opacity .3s ease-out,box-shadow .3s ease-out,width .2s ease-out;
+        font-size: rem(13px);
+
+        &:focus {
+            width: rem(160px);
+            border-color: $neonGreen;
+            box-shadow: 0 1px 0 rgba(255,255,255,0);
+            opacity: 1;
+        }
+    }
+
+    .dropdown-menu {
+        background: #ECE9E6;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #FFFFFF, #ECE9E6);
+        box-shadow: 0 rem(1px) 4px rgba(0,0,0,.2), inset 0 rem(1px) 0 rgba(255,255,255,.05);
+        border-radius: rem(5px);
+        border: rem(1px) solid rgba(0,0,0,.7);
+        border-bottom: rem(1px) solid rgba(0,0,0,.8);
+
+        a {
+            font-size: rem(12px);
+            padding: rem(6px) rem(8px);
+
+            &:hover {
+                background: $pastelYellow;
+                color: $black;
+            }
+
+            &:active {
+                color: $black;
+            }
+
+            &:visited {
+                color: $black;
+            }
+
+            i {
+                color: $black;
+                padding-right: 1.2rem
+            }
+        }
+    }
+
+    .navbar-brand > img {
+        width: 4.8rem;
+    }
+}
+
+.activeNavbar {
+    box-shadow: 0 0 rem(80px) rgba(0,0,0,.2);
+    transition: all 0.4s ease-in-out;
+}

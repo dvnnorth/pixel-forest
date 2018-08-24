@@ -1,30 +1,18 @@
-/* Global Variables */
+/* Global Variables  */
 $black:       #1d1d1d;
 $white:       #FEFEFE;
-$onyx:        #3C3744;
-$neonGreen:   #00FF00;
+$neonGreen:   #00ff00;
 $pastelGreen: #CBE5C0;
 $pastelYellow:#F9F398;
-$iris:        #3D52D5;
-$steel:       #B4C5E4;
-$ivory:       #FBFFF1;
 
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans');
-@import "././node_modules/sass-rem/rem";
 
-/* Grid Components */
-
-.cssGridThreeMax {
-    display: grid;
-    grid-gap: rem(16px);
-    grid-template-columns: repeat(auto-fill, minmax(rem(350px), 1fr));
-}
-
-.cssGridAutofill {
-    display: grid;
-    grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(rem(260px), 1fr));
-}
+@import '././node_modules/sass-rem/rem';
+@import './partials/grid';
+@import './partials/form';
+@import './partials/navbar';
+@import './partials/footer';
+@import './partials/group';
 
 body {
     font-family: 'Noto Sans', sans-serif;
@@ -38,167 +26,4 @@ h4,
 h5,
 h6 {
     font-family: 'Fjalla One', sans-serif;
-}
-
-.navbar {
-    background: #ECE9E6;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #FFFFFF, #ECE9E6);
-    height: rem(62px); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-    a {
-        color: $white;
-        font-size: rem(16px);
-    }
-
-    i {
-        width: rem(15px);
-        height: rem(15px);
-        color: $black;
-        opacity: .6;
-        margin-left: rem(14px);
-
-        &:hover {
-            opacity: 1;
-            transition: .2s ease-out;
-        }
-    }
-
-    .headerSearch {
-        -webkit-flex-shrink: 0;
-        -ms-flex-negative: 0;
-        flex-shrink: 0;
-        width: rem(100px);
-        height: rem(28px);
-        margin: 0;
-        padding: rem(5px) rem(12px) rem(6px);
-        background-color: $white;
-        color: #fff;
-        border: 1px solid rgba(0,0,0,.9);
-        box-shadow: 0 rem(1px) 0 rgba(255,255,255,.04);
-        outline: 0;
-        border-radius: rem(50px);
-        opacity: .6;
-        transition: opacity .3s ease-out,box-shadow .3s ease-out,width .2s ease-out;
-        font-size: rem(13px);
-
-        &:focus {
-            width: rem(160px);
-            border-color: $pastelGreen;
-            box-shadow: 0 1px 0 rgba(255,255,255,0);
-            opacity: 1;
-        }
-    }
-
-    .dropdown-menu {
-        background: #ECE9E6;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to top, #FFFFFF, #ECE9E6);
-        box-shadow: 0 rem(1px) 4px rgba(0,0,0,.2), inset 0 rem(1px) 0 rgba(255,255,255,.05);
-        border-radius: rem(5px);
-        border: rem(1px) solid rgba(0,0,0,.7);
-        border-bottom: rem(1px) solid rgba(0,0,0,.8);
-
-        a {
-            font-size: rem(12px);
-
-            &:hover {
-                background: $pastelYellow;
-                color: $black;
-            }
-
-            &:active {
-                color: $black;
-            }
-
-            &:visited {
-                color: $black;
-            }
-
-            i {
-                color: $black;
-                padding-right: 1.2rem
-            }
-        }
-    }
-
-    .navbar-brand > img {
-        width: 4.8rem;
-    }
-}
-
-.activeNavbar {
-    box-shadow: 0 0 rem(80px) rgba(0,0,0,.2);
-    transition: all 0.4s ease-in-out;
-}
-
-.group {
-    h3 {
-        color: $black;
-        padding: 3.4rem 0 1rem 0;
-    }
-
-    img {
-        box-shadow: 0 rem(2px) rem(5px) rgba(0,0,0,.5);
-        border: rem(1px) solid rgba(255,255,255,.5);
-
-        &:hover {
-            border: rem(1px) solid $neonGreen;
-        }
-    }
-}
-
-.bannerImg {
-    width: 100%;
-    height: rem(222px);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.footer {
-    text-align: center;
-    padding: 2.2rem 0;
-    margin-top: 3.4rem;
-    background: #ECE9E6;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-    h6 {
-        color: $black;
-    }
-}
-
-#exampleModalCenter {
-    color: $white;
-
-    .modal-body {
-        background: $black;
-
-        label {
-            display: block;
-        }
-
-        button {
-            border-radius: rem(50px);
-            font-size: rem(13px);
-            height: rem(22px);
-        }
-        input {
-            border-radius: rem(50px);
-        }
-
-        textarea {
-            border-radius: rem(10px);
-        }
-    }
-
-    .modal-header {
-        background: $black;
-    }
-
-    .modal-footer {
-        background: $black;
-    }
 }

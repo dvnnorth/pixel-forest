@@ -1,0 +1,15 @@
+.group {
+    h3 {
+        color: $black;
+        padding: 3.4rem 0 1rem 0;
+    }
+
+    img {
+        box-shadow: 0 rem(2px) rem(5px) rgba(0,0,0,.5);
+        border: rem(1px) solid rgba(255,255,255,.5);
+
+        &:hover {
+            border: rem(1px) solid $neonGreen;
+        }
+    }
+}
