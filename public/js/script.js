@@ -18,7 +18,7 @@ $(function () {
             email: $('#inputEmail').val().trim(),
             password: $('#inputPassword').val().trim()
         }
-        submitUserPass('api/login/signup', userInfo);
+        submitUserPass('/api/login/signup', userInfo);
     });
 
     $('#signInSubmit').on('click', function (event) {
@@ -28,7 +28,7 @@ $(function () {
             email: $('#inputEmail').val().trim(),
             password: $('#inputPassword').val().trim()
         }
-        submitUserPass('api/login', userInfo);
+        submitUserPass('/api/login', userInfo);
     });
 
     function submitUserPass(endpoint, data) {

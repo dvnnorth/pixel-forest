@@ -24,9 +24,9 @@
     <div class="container group">
         <h3>Popular Posts</h3>
         <div class="cssGridThreeMax">
-            {{!-- <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,child,baby,infant" alt="random thumbnail">
+            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,child,baby,infant" alt="random thumbnail">
             <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babysit,babies" alt="random thumbnail">
-            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babies" alt="random thumbnail"> --}}
+            <img height="360" width="360" src="https://source.unsplash.com/1600x900/?children,babies" alt="random thumbnail">
         </div>
     </div>
 </section>
@@ -35,30 +35,30 @@
     <div id="m1Group" class="container group">
         <h3>August - 2018</h3>
         <div class="cssGridAutofill">
-            {{!-- <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
             <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,playing" alt="random thumbnail">
             <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,kids" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail"> --}}
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
         </div>
     </div>
 
     <div class="container group">
         <h3>July - 2018</h3>
         <div class="cssGridAutofill">
-            {{!-- <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,kids" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,kids" alt="random thumbnail">
             <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children" alt="random thumbnail">
             <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,daycare" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,smile" alt="random thumbnail"> --}}
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?baby,smile" alt="random thumbnail">
         </div>
     </div>
 
     <div class="container group">
         <h3>June - 2018</h3>
         <div class="cssGridAutofill">
-            {{!-- <img height="260" width="260" src="https://source.unsplash.com/1600x900/?milk" alt="random thumbnail">
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?milk" alt="random thumbnail">
             <img height="260" width="260" src="https://source.unsplash.com/1600x900/?child,infant" alt="random thumbnail">
             <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children,baby,kids" alt="random thumbnail">
-            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children," alt="random thumbnail"> --}}
+            <img height="260" width="260" src="https://source.unsplash.com/1600x900/?children," alt="random thumbnail">
         </div>
     </div>
 
@@ -72,7 +72,7 @@
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form>
+                <form action="POST">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">Upload Your Content</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -81,26 +81,20 @@
                     </div>
                     <div class="modal-body">
                         <label for="upload">Upload:</label>
-                        <input id="postFile" type="file">
+                        <input id="upload" type="file">
 
                         <label for="title">Title:</label>
-                        <input id="postTitle" type="text">
+                        <input id="title" type="text">
 
                         <label for="description">Description:</label>
-                        <textarea id="postBody" name="description" cols="30" rows="10"></textarea>
+                        <textarea id="description" name="description" cols="30" rows="10"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" id="postSubmit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-
-<script>
-    let script = document.createElement("script");
-    script.setAttribute("src", "/js/render.js");
-    document.body.appendChild(script);
-</script>
