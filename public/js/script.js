@@ -1,27 +1,49 @@
 $(function () {
-    $('#signUpSubmit').click(function (event) {
-        event.preventDefault();
-        submitUserPass('/login/signup');
+    $(document).on("scroll", function () {
+        if ($(document).scrollTop() > 100) {
+            $(".navbar").addClass("activeNavbar");
+            $('.bg').addClass('show');
+        } else {
+            $(".navbar").removeClass("activeNavbar");
+            $('.bg').removeClass('show');
+        }
     });
 
-    $('#signInSubmit').click(function (event) {
+    $('#signUpSubmit').on('click', function (event) {
         event.preventDefault();
-        submitUserPass('/login');
+        // MAKE SURE TO PERFORM VALIDATION! Firebase is lenient!
+        var userInfo = {
+            firstName: $('#firstName').val().trim(),
+            lastName: $('#lastName').val().trim(),
+            email: $('#inputEmail').val().trim(),
+            password: $('#inputPassword').val().trim()
+        }
+        submitUserPass('/api/login/signup', userInfo);
     });
 
-    function submitUserPass(endpoint) {
+    $('#signInSubmit').on('click', function (event) {
+        event.preventDefault();
         // MAKE SURE TO PERFORM VALIDATION! Firebase is lenient!
         var userInfo = {
             email: $('#inputEmail').val().trim(),
             password: $('#inputPassword').val().trim()
         }
-        $.post(endpoint, userInfo, function (data) {
-            console.log("success");
-            console.log(JSON.parse(data));
+        submitUserPass('/api/login', userInfo);
+    });
+
+    function submitUserPass(endpoint, data) {
+        $.post(endpoint, data, function (userInfo) {
+            sessionStorage.setItem('token', userInfo.token);
+            sessionStorage.setItem('id', userInfo.id);
+            window.location.replace('/profile');
         })
             .fail(function (response) {
-                $("#errorMessage").text(response.responseJSON.message);
-                $("#errorBlock").removeClass("d-none");
+                loginError(response);
             });
+    }
+
+    function loginError(response) {
+        $("#errorMessage").text(response.responseJSON.message);
+        $("#errorBlock").removeClass("d-none");
     }
 });
