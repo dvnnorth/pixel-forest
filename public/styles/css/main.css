@@ -133,7 +133,8 @@ label:active:after {
   margin-top: 20vh; }
   .postContent input, .postContent textarea {
     margin: .4rem 0;
-    width: 80%; }
+    width: 80%;
+    color: #FEFEFE; }
   .postContent h3 {
     color: #FEFEFE; }
 

@@ -140,9 +140,10 @@ label:active:after {
   margin-top: 20vh; }
   .postContent input, .postContent textarea {
     margin: .4rem 0;
-    width: 80%; }
+    width: 80%;
+    color: #1d1d1d; }
   .postContent h3 {
-    color: #FEFEFE; }
+    color: #1d1d1d; }
 
 .form-signin {
   margin-top: 25vh; }
