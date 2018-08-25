@@ -288,9 +288,26 @@ module.exports = function (app, firebase, fbAdmin) {
                                 id: userID
                             }
                         })
-                            .then(function (updatedPost) {
-                                res.statusCode = 200;
-                                res.send();
+                            .then(function () {
+                                // Cascade not working, destroy manually
+                                db.Posts.findAll({
+                                    where: {
+                                        UserId: userID
+                                    }
+                                })
+                                    .then(function (posts) {
+                                        console.log(posts);
+                                        let ids = posts.map(function (post) { return post.id; });
+                                        console.log(ids);
+                                        db.Posts.destroy({
+                                            where: {
+                                                id: ids
+                                            }
+                                        }).then(function () {
+                                            res.statusCode = 200;
+                                            res.send();
+                                        });
+                                    });
                             });
                     })
                     .catch(function (error) {
