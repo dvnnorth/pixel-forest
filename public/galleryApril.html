@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sweet Pea | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, activeNavbar-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"><!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"><!-- Font Awesome -->
+    <link rel="stylesheet" href="./styles/css/main.css"><!-- External CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    
+  </head>
+  
+  <body style="background: url('./media/wallhaven-379567darkbg.jpg'); background-size: cover;">
+      <nav class="navbar sticky-top">
+          <div class="container">
+              <a class="navbar-brand" href="./albums.html">
+                  <h3 class="pixelForest">Pixel Forest</h3>
+              </a>
+              <div class="dropdown ml-auto">
+                  <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="post.html"><i class="fas fa-images"></i> Upload A Photo</a>
+                      <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                      <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i> Delete Account</a>
+                  </div>
+              </div>
+          </div>
+      </nav>
+    
+    <div class="container group">
+        <h3>Gallery</h3>
+        <div class="cssGridGallery">
+            <a href="#" data-toggle="modal" data-target="#photoModal"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?children,playing" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?children,kids" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?grass" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?mountain" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?newyork" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?city" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?cold" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?snow" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?snowflake" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?warm" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?beach" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?ocean" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?waves" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?children" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?tech" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?computer" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?lightning" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?storm" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?boulder" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?rocks" alt="random thumbnail"></a>
+            <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?lava" alt="random thumbnail"></a>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br /> <!-- Devins HACKKKKKK -->
+    
+    <footer class="footer">
+        <div class="container">
+            <h6 class="text-center">Pixel Forest Inc. &copy; 2018</h6>
+        </div>
+    </footer>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Image Title</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <img class="mb-2" height="400" width="400" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati nam sed magni, eligendi dicta maiores voluptates id tempore laudantium voluptatibus dolorum doloribus, error ab fugit voluptatum placeat vitae alias soluta? Quod numquam esse labore voluptatibus necessitatibus. Temporibus aut aperiam quasi.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-light">Edit</button>
+          <button class="btn-danger">Delete</button> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Delete Account Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Are You Sure You Want to Delete Your Account?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Deleting your account will result in permenent loss of all content</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger">Delete Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    
+    <script> 
+      $(document).on("scroll", function(){
+          if ($(document).scrollTop() > 100) {
+            $(".navbar").addClass("activeNavbar");
+            $('.bg').addClass('show');
+          } else {
+            $(".navbar").removeClass("activeNavbar");
+            $('.bg').removeClass('show');	
+          }
+      });
+
+      $(function () {
+          $('#btn-popover').popover({
+            placement: 'left',
+            html: 'true',
+            title: `<h4>Are You Sure?</h4>`,
+            content: `<button class="btn-danger">Delete</button>`
+          })
+      })
+
+    </script>
+  </body>
+</html>

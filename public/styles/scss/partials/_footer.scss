@@ -1,0 +1,15 @@
+.footer {
+    text-align: center;
+    padding: 2.2rem 0;
+    width: 100%;
+    height: rem(62px);
+    margin-top: 3.4rem;
+    background: linear-gradient(to bottom,#222,#1a1a1a);
+    border-bottom: 1px solid #0f0f0f;
+    position: absolute;
+    bottom: 0;
+
+    h6 {
+        color: $white;
+    }
+}
