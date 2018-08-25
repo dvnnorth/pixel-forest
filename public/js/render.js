@@ -84,6 +84,9 @@ $(function () {
                             $('#photoModal .modal-body')
                                 .append($image)
                                 .append($body);
+                            if (!$('#photoEditSubmit').hasClass('d-none')) {
+                                $('#photoEditSubmit').attr('class', 'd-none');
+                            }
                             $modal.modal('show');
                         });
                 });
