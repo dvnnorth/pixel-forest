@@ -89,46 +89,6 @@ module.exports = function (app, firebase, fbAdmin) {
         res.render('post');
     });
 
-    app.get('/share/:token', function (req, res) {
-        // Get the User a Viewer can see
-        // Render their profile page without post functionality
-        db.Viewers.findOne(
-            {
-                where: {
-                    accessToken: req.params.token
-                }
-            }
-        )
-            .then(function (viewer) {
-                db.Users.findOne(
-                    {
-                        where: {
-                            id: viewer.UserId
-                        }
-                    },
-                    {
-                        include: [db.Users]
-                    }
-                )
-                    .then(function (user) {
-                        db.Posts.findAll(
-                            {
-                                where: {
-                                    UserId: user.id
-                                }
-                            },
-                            {
-                                include: [db.Users]
-                            }
-                        )
-                            .then(function (posts) {
-                                console.log(posts);
-                                res.render('share', posts);
-                            });
-                    });
-            });
-    });
-
     // Render 404 page for any unmatched routes
     app.get('*', function (req, res) {
         res.render('404');
