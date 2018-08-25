@@ -17,7 +17,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Config and initialize Firebase admin obj
-var serviceAccount = require('./admin/sweetpea-74522-firebase-adminsdk-kenx4-d8e5fa70d6.json');
+var serviceAccount = require('./admin/sweetpea-74522-firebase-adminsdk-kenx4-dfcba4dca9.json');
 
 fbAdmin.initializeApp({
     credential: fbAdmin.credential.cert(serviceAccount),
