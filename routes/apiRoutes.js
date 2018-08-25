@@ -3,6 +3,10 @@ const sharp = require('sharp');
 const request = require('request').defaults({
     encoding: null
 });
+const fs = require('fs');
+
+// FTP Dependancies
+var Client = require('ftp');
 
 module.exports = function (app, firebase, fbAdmin) {
 
@@ -91,6 +95,7 @@ module.exports = function (app, firebase, fbAdmin) {
 
         let token = req.header('token');
         let userID = req.header('id');
+        let passedRes = res;
 
         if (token) {
 
@@ -101,8 +106,37 @@ module.exports = function (app, firebase, fbAdmin) {
 
                         db.Posts.create(req.body)
                             .then(function (postEntry) {
-                                res.statusCode = 200;
-                                res.send(postEntry);
+
+                                /////////////////////////// sharp
+
+                                // url of original file.  You can also choose to use a buffer and remove the requirement of the request library
+                                let imgURL = postEntry.pictureUrl;
+
+                                request.get(imgURL, function (err, res, inputBuffer) {
+                                    sharp(inputBuffer)
+                                        .resize(350, 350)
+                                        .min()
+                                        .crop(sharp.strategy.attention)
+                                        .toFormat('jpeg')
+                                        .toBuffer()
+                                        .then(function (outputBuffer) {
+                                            // outputBuffer contains JPEG image data no wider than 350 pixels and no higher
+                                            // than 350 pixels regardless of the inputBuffer image dimensions
+                                            let originalFN = imgURL.substring(imgURL.lastIndexOf('/') + 1);
+                                            let thumbnailFN = originalFN
+                                                .substring(0, originalFN.lastIndexOf('.')) + '_thumb' + originalFN.substring(originalFN.lastIndexOf('.'))
+                                                .split('?')[0];
+                                                
+
+                                            uploadThumbNail(outputBuffer, thumbnailFN, passedRes, postEntry);
+                                            // fs.writeFile(thumbnailFN, outputBuffer, 'binary', function (err) {
+                                            //     if (err) throw err
+                                            //     console.log('File saved.');
+                                            // });
+                                        });
+                                });
+
+                                ////////////////////////////
                             });
                     })
                     .catch(function (error) {
@@ -344,5 +378,26 @@ module.exports = function (app, firebase, fbAdmin) {
                 res.statusCode = 401;
                 res.send(error);
             });
+    }
+
+    // Uploads thumnail image to digitalocean server
+    // images are viewable at http://142.93.206.185/img/${thumbnailFN}
+    function uploadThumbNail(outputBuffer, thumbnailFN, res, postEntry) {
+        let c = new Client();
+        c.on('ready', function () {
+            c.put(outputBuffer, thumbnailFN, function (err) {
+                if (err) throw err;
+                console.log('File viewable @ http://142.93.206.185/img/' + thumbnailFN);
+                res.statusCode = 200;
+                res.send(postEntry);
+                c.end();
+            });
+        });
+        // connect to localhost:21 as anonymous
+        c.connect({
+            'host': '142.93.206.185',
+            'user': 'ftpuser',
+            'password': 'G4L9vNsywt5KVFbe'
+        });
     }
 };

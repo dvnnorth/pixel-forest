@@ -50,6 +50,9 @@
             <div class="modal-body">
             </div>
             <div class="modal-footer">
+                <div id="editError" style="color: red"></div>
+                <div id="shareLink"></div>
+                <button id="photoShare" class="btn-light">Share</button>
                 <button id="photoEdit" class="btn-light">Edit</button>
                 <button id="photoEditSubmit" class="btn-primary d-none">Submit</button>
                 <button id="photoDelete" class="btn-danger">Delete</button>
@@ -72,7 +75,8 @@
                 <p>Deleting your account will result in permanent loss of all content</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Delete Account</button>
+                <button id="deleteAccountCancel" type="button" class="btn btn-light">Cancel</button>
+                <button id="deleteAccount" type="button" class="btn btn-danger">Delete Account</button>
             </div>
         </div>
     </div>
