@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sweet Pea | Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, activeNavbar-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"><!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"><!-- Font Awesome -->
+    <link rel="stylesheet" href="./styles/css/main.css"><!-- External CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    
+  </head>
+  <body>
+    <div class="relativeContainer">
+    <nav class="navbar sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="./albums.html">
+                    <h3 class="pixelForest">Pixel Forest</h3>
+                </a>
+                <div class="dropdown ml-auto">
+                    <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="post.html"><i class="fas fa-images"></i> Upload A Photo</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i> Delete Account</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    
+    <div class="container postContent">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h3>Post Your Content</h3>
+                <form action="POST">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                        <input type="file">
+                                </div>
+                                <div class="col-12">
+                                        <input id="title" type="text" placeholder="Title">        
+                                </div>
+                                <div class="col-12">
+                                        <textarea id="description" name="description" cols="30" rows="5" placeholder="Description"></textarea>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+            <div class="container">
+                <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
+            </div>
+    </footer>
+    </div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    
+    <script> 
+      $(document).on("scroll", function(){
+          if ($(document).scrollTop() > 100) {
+            $(".navbar").addClass("activeNavbar");
+            $('.bg').addClass('show');
+          } else {
+            $(".navbar").removeClass("activeNavbar");
+            $('.bg').removeClass('show');	
+          }
+      });
+
+    </script>
+  </body>
+</html>
