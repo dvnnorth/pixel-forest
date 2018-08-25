@@ -84,6 +84,7 @@
 .group h3 {
   color: #FEFEFE;
   padding: 3.4rem 0 1rem 0; }
+
 .group img {
   box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.5);
   border: 0.0625rem solid rgba(255, 255, 255, 0.5); }
@@ -128,7 +129,7 @@
   padding-bottom: 3.375rem; }
 
 body {
-  background: url("../../media/wallhaven-379567.jpg") no-repeat 50% 50% fixed;
+  background: url("../../media/wallhaven-379567darkbg.jpg") no-repeat 50% 50% fixed;
   background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -149,5 +150,3 @@ h6 {
   overflow: hidden;
   display: block;
   position: relative; }
-
-/*# sourceMappingURL=main.css.map */
