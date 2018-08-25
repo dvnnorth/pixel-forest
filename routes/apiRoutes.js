@@ -50,6 +50,34 @@ module.exports = function (app, firebase, fbAdmin) {
     // Get a post
     app.get('/api/profile/post/:id', function (req, res) {
         // Get a post from the database, return the object needed to insert the post into the modal
+
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                db.Posts.findOne({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                    .then(function (post) {
+                        res.statusCode = 200;
+                        res.send(post.dataValues);
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                        res.statusCode = 500;
+                        res.send(error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
 
@@ -65,12 +93,12 @@ module.exports = function (app, firebase, fbAdmin) {
         let userID = req.header('id');
 
         if (token) {
-            
+
             checkAuth(token, res, function (decodedToken) {
                 let uid = decodedToken.uid;
                 fbAdmin.auth().getUser(uid)
                     .then(function (userRecord) {
-                        
+
                         db.Posts.create(req.body)
                             .then(function (postEntry) {
                                 res.statusCode = 200;
@@ -156,31 +184,83 @@ module.exports = function (app, firebase, fbAdmin) {
             })
     });
 
-    // Share a profile
-    app.post('/api/share', function (req, res) {
-        // Create a new Viewer
-        // Generate and send email to Viewer
-    });
-
-    // Log a user out
-    app.post('/api/logout', function (req, res) {
-
-    });
-
     // Update a post
-    app.put('/api/profile/post', function (req, res) {
+    app.put('/api/profile/post/:id', function (req, res) {
         // Grab data to be updated
         // Update columns for post in posts table
         // render/return updated post page
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        console.log(req.body);
+                        db.Posts.update(
+                            req.body,
+                            {
+                                where: {
+                                    id: req.params.id
+                                }
+                            }
+                        )
+                            .then(function (updatedPost) {
+                                res.statusCode = 200;
+                                res.send(updatedPost);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
     // Delete a post
-    app.delete('/api/profile/post', function (req, res) {
+    app.delete('/api/profile/post/:id', function (req, res) {
         // Get post ID from request
         // Delete image from hosting
         // Remove entry from table
         // Return 200 if successful
         // Or redirect to profile page with message?
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        console.log(req.body);
+                        db.Posts.destroy(
+                            {
+                                where: {
+                                    id: req.params.id
+                                }
+                            }
+                        )
+                            .then(function () {
+                                res.statusCode = 200;
+                                res.send();
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error deleting post data", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
     // Delete account
@@ -193,6 +273,35 @@ module.exports = function (app, firebase, fbAdmin) {
         // Delete group associated with profile
         // Delete profile
         // Return 200 if successful
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        console.log(req.body);
+                        db.Users.destroy({
+                            where: {
+                                id: userID
+                            }
+                        })
+                            .then(function (updatedPost) {
+                                res.statusCode = 200;
+                                res.send();
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
     function sendUser(res, userID) {
