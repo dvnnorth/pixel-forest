@@ -7,28 +7,27 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"><!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"><!-- Font Awesome -->
-    <link rel="stylesheet" href="./styles/css/main.css"><!-- External CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <link id="pagestyle" rel="stylesheet" href="./styles/css/main.css"><!-- External CSS -->
     
   </head>
   <body>
     <div class="relativeContainer">
     <nav class="navbar sticky-top">
-            <div class="container">
-                <a class="navbar-brand" href="./albums.html">
-                    <h3 class="pixelForest">Pixel Forest</h3>
-                </a>
-                <div class="dropdown ml-auto">
-                    <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="post.html"><i class="fas fa-images"></i> Upload A Photo</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i> Delete Account</a>
-                    </div>
+        <div class="container">
+            <a class="navbar-brand" href="./home.html">
+                <h3 class="pixelForest">Pixel Forest</h3>
+            </a>
+            <div class="dropdown ml-auto">
+                <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="post.html"><i class="fas fa-images"></i> Upload A Photo</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i> Delete Account</a>
+                    <a class="dropdown-item" href="#"><button onclick="swapStyleSheet('./styles/css/light.css')">Light UI</button><button class="ml-auto" onclick="swapStyleSheet('./styles/css/main.css')">Dark UI</button><button onclick="swapStyleSheet('./styles/css/green.css')">Green UI</button></a>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
     
     <div class="container postContent">
         <div class="row">
@@ -77,6 +76,10 @@
             $('.bg').removeClass('show');	
           }
       });
+
+      function swapStyleSheet(sheet){
+        document.getElementById('pagestyle').setAttribute('href', sheet);
+      }
 
     </script>
   </body>
