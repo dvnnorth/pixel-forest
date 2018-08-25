@@ -1,0 +1,28 @@
+.form-signin {
+
+    margin-top: 25vh;
+
+    img {
+        width: rem(300px);
+    }
+
+    input {
+        margin: 1rem 0;
+    }
+
+    h3, h2 {
+        color: $white;
+    }
+
+    a {
+        color: $white;
+    }
+}
+
+.relativeContainer {
+    min-height: 100vh;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: rem(54px);
+}

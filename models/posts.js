@@ -25,17 +25,13 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [1, 500]
             }
-        },
+        }
     });
     Posts.associate = function (models) {
         //post must belong to a user
         Posts.belongsTo(models.Users, {
             foreignKey: models.Users.id
         });
-        //a post is only displaying in one specific group
-        Posts.belongsTo(models.Groups, {
-            foreignKey: models.Groups.id
-        });
-    }
+    };
     return Posts;
 }
