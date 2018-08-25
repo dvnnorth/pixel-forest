@@ -20,47 +20,24 @@
   margin: 0.5rem 0; }
 
 .navbar {
-  background: #ECE9E6;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #FFFFFF, #ECE9E6);
+  background: linear-gradient(to bottom, #222, #1a1a1a);
+  border-bottom: 1px solid #0f0f0f;
   height: 3.875rem;
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
-  .navbar a {
+  .navbar h3 {
     color: #FEFEFE;
+    font-size: 1.375rem; }
+  .navbar a {
     font-size: 1rem; }
   .navbar i {
     width: 0.9375rem;
     height: 0.9375rem;
-    color: #1d1d1d;
+    color: #FEFEFE;
     opacity: .6;
     margin-left: 0.875rem; }
     .navbar i:hover {
       opacity: 1;
       transition: .2s ease-out; }
-  .navbar .headerSearch {
-    -webkit-flex-shrink: 0;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    width: 6.25rem;
-    height: 1.75rem;
-    margin: 0;
-    padding: 0.3125rem 0.75rem 0.375rem;
-    background-color: #FEFEFE;
-    color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.9);
-    box-shadow: 0 0.0625rem 0 rgba(255, 255, 255, 0.04);
-    outline: 0;
-    border-radius: 3.125rem;
-    opacity: .6;
-    transition: opacity .3s ease-out,box-shadow .3s ease-out,width .2s ease-out;
-    font-size: 0.8125rem; }
-    .navbar .headerSearch:focus {
-      width: 10rem;
-      border-color: #00ff00;
-      box-shadow: 0 1px 0 rgba(255, 255, 255, 0);
-      opacity: 1; }
   .navbar .dropdown-menu {
     background: #ECE9E6;
     /* fallback for old browsers */
@@ -71,18 +48,18 @@
     border-radius: 0.3125rem;
     border: 0.0625rem solid rgba(0, 0, 0, 0.7);
     border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.8); }
-    .navbar .dropdown-menu a {
+    .navbar .dropdown-menu .dropdown-item {
       font-size: 0.75rem;
       padding: 0.375rem 0.5rem; }
-      .navbar .dropdown-menu a:hover {
+      .navbar .dropdown-menu .dropdown-item:hover {
         background: #F9F398;
-        color: #1d1d1d; }
-      .navbar .dropdown-menu a:active {
-        color: #1d1d1d; }
-      .navbar .dropdown-menu a:visited {
-        color: #1d1d1d; }
-      .navbar .dropdown-menu a i {
-        color: #1d1d1d;
+        color: #1d1d1d !important; }
+      .navbar .dropdown-menu .dropdown-item:active {
+        color: #1d1d1d !important; }
+      .navbar .dropdown-menu .dropdown-item:visited {
+        color: #1d1d1d !important; }
+      .navbar .dropdown-menu .dropdown-item i {
+        color: #1d1d1d !important;
         padding-right: 1.2rem; }
   .navbar .navbar-brand > img {
     width: 4.8rem; }
@@ -94,18 +71,18 @@
 .footer {
   text-align: center;
   padding: 2.2rem 0;
+  width: 100%;
+  height: 3.875rem;
   margin-top: 3.4rem;
-  background: #ECE9E6;
-  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to top, #FFFFFF, #ECE9E6);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */ }
+  background: linear-gradient(to bottom, #222, #1a1a1a);
+  border-bottom: 1px solid #0f0f0f;
+  position: absolute;
+  bottom: 0; }
   .footer h6 {
-    color: #1d1d1d; }
+    color: #FEFEFE; }
 
 .group h3 {
-  color: #1d1d1d;
+  color: #FEFEFE;
   padding: 3.4rem 0 1rem 0; }
 
 .group img {
@@ -114,9 +91,40 @@
   .group img:hover {
     border: 0.0625rem solid #00ff00; }
 
+.postContent {
+  margin-top: 20vh; }
+  .postContent input, .postContent textarea {
+    margin: .4rem 0;
+    width: 80%; }
+  .postContent h3 {
+    color: #FEFEFE; }
+
+.form-signin {
+  margin-top: 25vh; }
+  .form-signin img {
+    width: 18.75rem; }
+  .form-signin input {
+    margin: 1rem 0; }
+  .form-signin h3, .form-signin h2 {
+    color: #FEFEFE; }
+  .form-signin a {
+    color: #FEFEFE; }
+
+.relativeContainer {
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-bottom: 3.375rem; }
+
 body {
+  background: url("../../media/wallhaven-379567.jpg") no-repeat 50% 50% fixed;
+  background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
   font-family: 'Noto Sans', sans-serif;
-  background: #FEFEFE; }
+  position: relative; }
 
 h1,
 h2,
@@ -125,3 +133,9 @@ h4,
 h5,
 h6 {
   font-family: 'Fjalla One', sans-serif; }
+
+.relativeContainer {
+  min-height: 100vh;
+  overflow: hidden;
+  display: block;
+  position: relative; }

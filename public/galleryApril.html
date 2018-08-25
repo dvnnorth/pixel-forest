@@ -11,24 +11,24 @@
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     
   </head>
-  <body>
-    <nav class="navbar sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="albums.html">
-              <img src="./media/sweetPeaLogo.png" alt="sweetPeaLogo">
-            </a>
-            <input class="headerSearch ml-auto" type="text" name="search" placeholder="Search...">
-            <div class="dropdown">
-                <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="post.html" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-images"></i> Upload A Photo</a>
-                  <a class="dropdown-item" href="#"><i class="fas fa-certificate"></i> About Sweet Pea</a>
-                  <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
-                </div>
-            </div>
-            <i class="fas fa-user-circle"></i>
-        </div>
-    </nav>
+  
+  <body style="background: url('./media/wallhaven-379567darkbg.jpg'); background-size: cover;">
+      <nav class="navbar sticky-top">
+          <div class="container">
+              <a class="navbar-brand" href="./albums.html">
+                  <h3 class="pixelForest">Pixel Forest</h3>
+              </a>
+              <div class="dropdown ml-auto">
+                  <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="post.html"><i class="fas fa-images"></i> Upload A Photo</a>
+                      <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                      <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i> Delete Account</a>
+                  </div>
+              </div>
+          </div>
+      </nav>
     
     <div class="container group">
         <h3>Gallery</h3>
@@ -57,61 +57,60 @@
             <a href="#"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?lava" alt="random thumbnail"></a>
         </div>
     </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br /> <!-- Devins HACKKKKKK -->
     
     <footer class="footer">
         <div class="container">
-            <h6 class="text-center">Sweet Pea Inc. &copy; 2018</h6>
+            <h6 class="text-center">Pixel Forest Inc. &copy; 2018</h6>
         </div>
     </footer>
-
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Post Content</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <form action="POST">
-                  <div class="row">
-                      <div class="col-12">
-                          <div class="row">
-                              <div class="col-12">
-                                      <input id="upload" type="text" placeholder="Post Content"><button>Browse..</button>
-                              </div>
-                              <div class="col-12">
-                                      <input id="title" type="text" placeholder="Title">        
-                              </div>
-                              <div class="col-12">
-                                      <textarea id="description" name="description" cols="30" rows="5" placeholder="Description"></textarea>  
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </form>
-          </div>
-        </div>
-      </div>
-  </div>
   
   <!-- Modal -->
   <div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="photoModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
+          <h3>Image Title</h3>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <img height="400" width="400" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
+            <img class="mb-2" height="400" width="400" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati nam sed magni, eligendi dicta maiores voluptates id tempore laudantium voluptatibus dolorum doloribus, error ab fugit voluptatum placeat vitae alias soluta? Quod numquam esse labore voluptatibus necessitatibus. Temporibus aut aperiam quasi.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-light">Edit</button>
+          <button class="btn-danger">Delete</button> 
         </div>
       </div>
     </div>
   </div>
+
+    <!-- Delete Account Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Are You Sure You Want to Delete Your Account?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Deleting your account will result in permenent loss of all content</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger">Delete Account</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -129,6 +128,15 @@
             $('.bg').removeClass('show');	
           }
       });
+
+      $(function () {
+          $('#btn-popover').popover({
+            placement: 'left',
+            html: 'true',
+            title: `<h4>Are You Sure?</h4>`,
+            content: `<button class="btn-danger">Delete</button>`
+          })
+      })
 
     </script>
   </body>

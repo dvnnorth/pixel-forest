@@ -13,10 +13,17 @@ $pastelYellow:#F9F398;
 @import './partials/navbar';
 @import './partials/footer';
 @import './partials/group';
+@import './partials/post';
+@import './partials/homeSignIn';
 
 body {
+    background: url('../../media/wallhaven-379567.jpg') no-repeat 50% 50% fixed;
+    background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -webkit-background-size: cover;
     font-family: 'Noto Sans', sans-serif;
-    background: $white;
+    position: relative;
 }
 
 h1,
@@ -26,4 +33,11 @@ h4,
 h5,
 h6 {
     font-family: 'Fjalla One', sans-serif;
+}
+
+.relativeContainer {
+    min-height: 100vh;
+    overflow: hidden;
+    display: block;
+    position: relative;
 }
