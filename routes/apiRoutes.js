@@ -1,47 +1,148 @@
 const db = require('../models');
+const sharp = require('sharp');
+const request = require('request').defaults({
+    encoding: null
+});
 
 module.exports = function (app, firebase, fbAdmin) {
 
+    app.get('/api/profile/content', function (req, res) {
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        db.Users.findOne({
+                            where: {
+                                id: userID
+                            }
+                        })
+                            .then(function (user) {
+                                db.Posts.findAll(
+                                    {
+                                        where: {
+                                            UserId: user.id
+                                        }
+                                    },
+                                    {
+                                        include: [db.Users]
+                                    }
+                                )
+                                    .then(function (posts) {
+                                        res.send(posts);
+                                    });
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
+    });
+
+    // Get a post
+    app.get('/api/profile/post/:id', function (req, res) {
+        // Get a post from the database, return the object needed to insert the post into the modal
+
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                db.Posts.findOne({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                    .then(function (post) {
+                        res.statusCode = 200;
+                        res.send(post.dataValues);
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                        res.statusCode = 500;
+                        res.send(error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
+    });
+
+
     // Create a new post
-    app.post('/profile/post', function (req, res) {
+    app.post('/api/profile/post', function (req, res) {
         // Retrieve image and post data from request
         // Upload image to storage (encrypt?)
         // Get photo cloud storage location
         // Insert new post into posts table
         // Render/return new post page in response
+
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+
+                        db.Posts.create(req.body)
+                            .then(function (postEntry) {
+                                res.statusCode = 200;
+                                res.send(postEntry);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
-    // Create a new group
-    app.post('/group', function (req, res) {
-        // Retrieve group name and image
-        // Upload image to storage
-        // Get photo storage location
-        // Insert new group data into groups table
-        // render/return new group page
+    app.post('/sharp', function (req, res) {
+        var imgUrl = req.body.url;
     });
 
     // Log-in user
-    app.post('/login', function (req, res) {
+    app.post('/api/login', function (req, res) {
         // Sign In User
         firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
             .then(function () {
                 console.log('user email: ', req.body.email);
                 let uid = firebase.auth().currentUser.uid;
                 // If successful, get token then send token to client for session storage
-                db.Users.findOne({
+                db.Users.findOrCreate({
                     where: {
                         email: req.body.email
+                    },
+                    defaults: {
+                        email: req.body.email,
+                        firstName: req.body.firstName || req.body.email,
+                        lastName: req.body.lastName || req.body.email
                     }
                 })
-                    .then(function (dbUser) {
-                        if (dbUser) {
-                            console.log('dbUser: ', dbUser);
-                            sendUser(res, dbUser.id);
-                        }
-                        else {
-                            res.send({ code: 'auth/invalid-email', message: 'User does not exist in database' });
-                        }
-
+                    .then(function (result) {
+                        let dbUser = result[0];
+                        let created = result[1];
+                        if (created) console.log('Created new user entry');
+                        sendUser(res, dbUser.id);
                     });
             })
             // Sign in errors
@@ -53,7 +154,7 @@ module.exports = function (app, firebase, fbAdmin) {
     });
 
     // Sign-up new user
-    app.post('/login/signup', function (req, res) {
+    app.post('/api/login/signup', function (req, res) {
         // Create user
         firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
             // On successful creation
@@ -61,12 +162,11 @@ module.exports = function (app, firebase, fbAdmin) {
                 let newUser = {
                     email: req.body.email,
                     firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    groupOwner: false
+                    lastName: req.body.lastName
                 };
                 // Create user entry in database
                 db.Users.create(newUser, {
-                    include: [db.Members, db.Posts]
+                    include: [db.Posts]
                 })
                     .then(function (dbUser) {
                         // Call send user to send the token in the response, front end code handles redirect
@@ -84,34 +184,87 @@ module.exports = function (app, firebase, fbAdmin) {
             })
     });
 
-    // Log a user out
-    app.post('/logout', function (req, res) {
-
-    });
-
     // Update a post
-    app.put('/profile/post', function (req, res) {
+    app.put('/api/profile/post/:id', function (req, res) {
         // Grab data to be updated
         // Update columns for post in posts table
         // render/return updated post page
-    });
+        let token = req.header('token');
+        let userID = req.header('id');
 
-    // Edit group permissions
-    app.put('/group', function (req, res) {
+        if (token) {
 
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        console.log(req.body);
+                        db.Posts.update(
+                            req.body,
+                            {
+                                where: {
+                                    id: req.params.id
+                                }
+                            }
+                        )
+                            .then(function (updatedPost) {
+                                res.statusCode = 200;
+                                res.send(updatedPost);
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
     // Delete a post
-    app.delete('/profile/post', function (req, res) {
+    app.delete('/api/profile/post/:id', function (req, res) {
         // Get post ID from request
         // Delete image from hosting
         // Remove entry from table
         // Return 200 if successful
         // Or redirect to profile page with message?
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        console.log(req.body);
+                        db.Posts.destroy(
+                            {
+                                where: {
+                                    id: req.params.id
+                                }
+                            }
+                        )
+                            .then(function () {
+                                res.statusCode = 200;
+                                res.send();
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error deleting post data", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
     // Delete account
-    app.delete('/profile', function (req, res) {
+    app.delete('/api/profile', function (req, res) {
         // After front end handles confirmation
         // Get profile information from request
         // Delete all posts associated with profile
@@ -120,6 +273,52 @@ module.exports = function (app, firebase, fbAdmin) {
         // Delete group associated with profile
         // Delete profile
         // Return 200 if successful
+        let token = req.header('token');
+        let userID = req.header('id');
+
+        if (token) {
+
+            checkAuth(token, res, function (decodedToken) {
+                let uid = decodedToken.uid;
+                fbAdmin.auth().getUser(uid)
+                    .then(function (userRecord) {
+                        console.log(req.body);
+                        db.Users.destroy({
+                            where: {
+                                id: userID
+                            }
+                        })
+                            .then(function () {
+                                // Cascade not working, destroy manually
+                                db.Posts.findAll({
+                                    where: {
+                                        UserId: userID
+                                    }
+                                })
+                                    .then(function (posts) {
+                                        console.log(posts);
+                                        let ids = posts.map(function (post) { return post.id; });
+                                        console.log(ids);
+                                        db.Posts.destroy({
+                                            where: {
+                                                id: ids
+                                            }
+                                        }).then(function () {
+                                            res.statusCode = 200;
+                                            res.send();
+                                        });
+                                    });
+                            });
+                    })
+                    .catch(function (error) {
+                        console.log("Error fetching user data:", error);
+                    });
+            });
+        }
+        else {
+            res.statusCode = 401;
+            res.send(new Error('Unauthorized'));
+        }
     });
 
     function sendUser(res, userID) {
@@ -131,6 +330,17 @@ module.exports = function (app, firebase, fbAdmin) {
                     token: idToken
                 });
             }).catch(function (error) {
+                res.statusCode = 401;
+                res.send(error);
+            });
+    }
+
+    function checkAuth(token, res, onSuccess, onFailure) {
+        fbAdmin.auth().verifyIdToken(token)
+            .then(function (decodedToken) {
+                onSuccess(decodedToken);
+            }).catch(function (error) {
+                if (onFailure) onFailure(error);
                 res.statusCode = 401;
                 res.send(error);
             });
