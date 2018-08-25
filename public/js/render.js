@@ -1,6 +1,14 @@
 $(function () {
 
-    var loginEndpoint = window.location.protocol + '//' + window.location.host + '/login';
+    var loginEndpoint = window.location.protocol + '//' + window.location.host + '/';
+
+    // Sign Out Functionality
+    $('#signOut').on('click', function (event) {
+        sessionStorage.removeItem('id');
+        sessionStorage.removeItem('token');
+        window.location.replace(loginEndpoint);
+    });
+
     if (sessionStorage.getItem('token')) {
         $.ajax({
             method: 'GET',
@@ -18,12 +26,14 @@ $(function () {
                 content.forEach(function (post) {
                     // This builds the images with a close button that will delete each image when clicked
                     // On click event for deleting above. Use data-deleteid attribute of button
+                    // <a href="#" data-toggle="modal" data-target="#photoModal"><img height="200" width="200" src="https://source.unsplash.com/1600x900/?children,smile" alt="random thumbnail"></a>
                     var newImg = $('<img>')
                         .attr('class', 'profilePhoto')
                         .attr('src', post.pictureUrl)
                         .attr('data-photoid', post.id)
-                        .attr('width', 260)
-                        .attr('height', 260)
+                        .attr('width', 200)
+                        .attr('height', 200)
+                        .attr('alt', post.title);
                     $("#postsDiv").append(newImg);
                 });
 
@@ -44,16 +54,17 @@ $(function () {
                     })
                         .then(function (post) {
                             var $src = $this.attr('src');
-                            var $modal = $('#exampleModalCenter');
-                            var $wrapper = $();
-                            var $title = $()
+                            var $modal = $('#photoModal');
+                            var $title = $('<h3>')
+                                .text(post.title);
                             var $image = $('<img>')
                                 .attr('class', 'modalPhoto')
                                 .attr('src', post.pictureUrl)
                                 .attr('data-photoid', post.id)
-                                .attr('width', 260)
-                                .attr('height', 260);
-                            $('#exampleModalCenter .modal-content')
+                                .attr('width', '100%');
+                            $('#photoModal .modal-header')
+                                .prepend($title);
+                            $('#photoModal .modal-body')
                                 .append($image);
                             $modal.modal('show');
                         });
