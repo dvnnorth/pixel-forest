@@ -183,6 +183,11 @@ $(function () {
                         }
                     })
                         .then(function (post) {
+                            if ($.trim($('#shareLink').html())) {
+                                $('#shareLink').empty();
+                            }
+                            var $shareHeader = $('<p>')
+                                .text('Sharable Link:');
                             var $shareLink = $('<textarea>')
                                 .attr('id', 'shareLink')
                                 .attr('class', 'mt-2')
@@ -190,8 +195,6 @@ $(function () {
                                 .attr('rows', 5)
                                 .attr('placeholder', post.pictureUrl)
                                 .text(post.pictureUrl);
-                            var $shareHeader = $('<p>')
-                                .text('Sharable Link:');
                             $('#shareLink')
                                 .append($shareHeader)
                                 .append($shareLink);
