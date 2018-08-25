@@ -23,7 +23,7 @@ module.exports = function (app, firebase, fbAdmin) {
         res.render('login');
     });
 
-    app.get('/login/signup', function (req, res) {
+    app.get('/signup', function (req, res) {
         res.render('signup');
     });
 

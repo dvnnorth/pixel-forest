@@ -84,7 +84,6 @@
 .group h3 {
   color: #FEFEFE;
   padding: 3.4rem 0 1rem 0; }
-
 .group img {
   box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.5);
   border: 0.0625rem solid rgba(255, 255, 255, 0.5); }
@@ -108,6 +107,17 @@
   .form-signin h3, .form-signin h2 {
     color: #FEFEFE; }
   .form-signin a {
+    color: #FEFEFE; }
+
+.form-signup {
+  margin-top: 15vh; }
+  .form-signup img {
+    width: 18.75rem; }
+  .form-signup input {
+    margin: 1rem 0; }
+  .form-signup h3, .form-signup h2 {
+    color: #FEFEFE; }
+  .form-signup a {
     color: #FEFEFE; }
 
 .relativeContainer {
@@ -139,3 +149,5 @@ h6 {
   overflow: hidden;
   display: block;
   position: relative; }
+
+/*# sourceMappingURL=main.css.map */

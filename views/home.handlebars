@@ -1,17 +1,17 @@
 <div class="relativeContainer">
     <nav class="navbar sticky-top">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    <h3 class="pixelForest">Pixel Forest</h3>
-                </a>
-                <div class="dropdown ml-auto">
-                    <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
-                    </div>
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <h3 class="pixelForest">Pixel Forest</h3>
+            </a>
+            <div class="dropdown ml-auto">
+                <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
     <div class="container form-signin">
         <div class="row">
@@ -23,7 +23,7 @@
                     <label for="inputPassword" class="sr-only">Password</label>
                     <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                     <button class="btn btn-lg btn-neon-green btn-block" type="submit" id="signInSubmit">Sign in</button>
-                    <a href="/login/signup" class="ml-auto">Sign Up</a>
+                    <a href="/signup" class="ml-auto">Sign Up</a>
                     <div class="d-none mt-2" id="errorBlock">
                         <p class="text-danger" id="errorMessage"></p>
                     </div>
@@ -33,35 +33,9 @@
     </div>
 
     <footer class="footer">
-            <div class="container">
-                <h6 class="text-center">Pixel Forest Inc. &copy; 2018</h6>
-            </div>
+        <div class="container">
+            <h6 class="text-center">Pixel Forest Inc. &copy; 2018</h6>
+        </div>
     </footer>
 
 </div>
-
-
-{{!-- <nav class="navbar sticky-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="./media/sweetPeaLogo.png" alt="sweetPeaLogo">
-        </a>
-        <input class="headerSearch ml-auto" type="text" name="search" placeholder="Search...">
-        <div class="dropdown">
-            <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-images"></i>
-                    Upload A Photo</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-certificate"></i> About Sweet Pea</a>
-                <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
-            </div>
-        </div>
-        <i class="fas fa-user-circle"></i>
-    </div>
-</nav>
-<section id="main-splash">
-    <div class="container">
-        <img class="d-block mx-auto my-4" src="/media/splash-logo.png" alt="Sweet Pea Logo">
-        <a class="btn btn-lg btn-neon-green btn-block mx-auto w-25" href="/login">Log In</a>
-    </div>
-</section> --}}

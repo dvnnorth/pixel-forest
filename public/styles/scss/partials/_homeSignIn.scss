@@ -19,6 +19,27 @@
     }
 }
 
+.form-signup {
+
+    margin-top: 15vh;
+
+    img {
+        width: rem(300px);
+    }
+
+    input {
+        margin: 1rem 0;
+    }
+
+    h3, h2 {
+        color: $white;
+    }
+
+    a {
+        color: $white;
+    }
+}
+
 .relativeContainer {
     min-height: 100vh;
     overflow: hidden;

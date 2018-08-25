@@ -1,22 +1,42 @@
-<div class="sign-in-body">
-    <div class="container">
-
-        <form class="form-signin">
-            <h2 class="form-signin-heading">Sign Up</h2>
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-neon-green btn-block" type="submit" id="signUpSubmit">Sign up!</button>
-            <div class="d-none mt-2" id="errorBlock">
-                <p class="text-danger" id="errorMessage"></p>
+<div class="relativeContainer">
+    <nav class="navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <h3 class="pixelForest">Pixel Forest</h3>
+            </a>
+            <div class="dropdown ml-auto">
+                <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                </div>
             </div>
-        </form>
+        </div>
+    </nav>
 
+    <div class="container form-signup">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form>
+                    <h3 class="form-signin-heading">Sign Up</h3>
+                    <input type="text" class="form-control" id="firstName" placeholder="First Name" value="" required>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="" required>
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                    <button class="btn btn-lg btn-block" type="submit" id="signUpSubmit">Sign Up</button>
+                    <div class="d-none mt-2" id="errorBlock">
+                        <p class="text-danger" id="errorMessage"></p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <!-- /container -->
+
+    <footer class="footer">
+        <div class="container">
+            <h6 class="text-center">Pixel Forest Inc. &copy; 2018</h6>
+        </div>
+    </footer>
+
 </div>

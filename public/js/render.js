@@ -62,12 +62,28 @@ $(function () {
                                 .attr('src', post.pictureUrl)
                                 .attr('data-photoid', post.id)
                                 .attr('width', '100%');
+                            var $body = $('<p>')
+                                .text(post.body);
+
+                            // Clear the modal
+                            $('#photoModal .modal-header').empty();
+                            $('#photoModal .modal-body').empty();
+
                             $('#photoModal .modal-header')
                                 .prepend($title);
                             $('#photoModal .modal-body')
-                                .append($image);
+                                .append($image)
+                                .append($body);
                             $modal.modal('show');
                         });
+                });
+
+                //Photo Delete Functionality
+                $('#photoDelete').on('click', function (event) {
+                    console.log('delete');
+                    var $this = $(this);
+                    var photoId = $(this).data('photoid');
+
                 });
             })
             .fail(function () {
