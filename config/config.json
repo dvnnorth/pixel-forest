@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "root",
-    "password": "Gcm9jg=gk3b8",
+    "username": "sequelize",
+    "password": "aEjf4QH0CPKKs2s05Cew",
     "database": "sweetpeaDb",
     "host": "127.0.0.1",
     "dialect": "mysql"
