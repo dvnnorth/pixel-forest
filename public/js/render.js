@@ -1,5 +1,9 @@
 $(function () {
 
+    function swapStyleSheet(sheet) {
+        document.getElementById('pagestyle').setAttribute('href', sheet);
+    }
+
     var loginEndpoint = window.location.protocol + '//' + window.location.host + '/';
     var profileEndpoint = window.location.protocol + '//' + window.location.host + '/profile';
 
