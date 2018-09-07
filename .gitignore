@@ -64,4 +64,4 @@ typings/
 .next
 
 # Firebase admin config file
-#admin/
+admin/
