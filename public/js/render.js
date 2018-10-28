@@ -91,6 +91,9 @@ $(function () {
                             if (!$('#photoEditSubmit').hasClass('d-none')) {
                                 $('#photoEditSubmit').attr('class', 'd-none');
                             }
+                            if ($.trim($('#shareLink').html())) {
+                                $('#shareLink').empty();
+                            }
                             $modal.modal('show');
                         });
                 });
@@ -194,6 +197,7 @@ $(function () {
                                 $('#shareLink').empty();
                             }
                             var $shareHeader = $('<p>')
+                                .attr('id', 'shareHeader')
                                 .text('Sharable Link:');
                             var $shareLink = $('<textarea>')
                                 .attr('id', 'shareLink')
