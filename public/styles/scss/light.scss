@@ -4,21 +4,20 @@ $white:       #FEFEFE;
 $neonGreen:   #00ff00;
 $pastelGreen: #CBE5C0;
 $pastelYellow:#F9F398;
-$darkGrey:    #686868;
 
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One|Noto+Sans');
 
 @import '../../../node_modules/sass-rem/rem';
 @import './partials/grid';
 @import './partials/form';
-@import './partials/navbar';
-@import './partials/footer';
-@import './partials/group';
-@import './partials/post';
+@import './partials/navbarlight';
+@import './partials/footerlight';
+@import './partials/groupLight';
+@import './partials/postLight';
 @import './partials/homeSignIn';
 
 body {
-    background: url('../../media/wallhaven-379567darkbg.jpg') no-repeat 50% 50% fixed;
+    background: url('../../media/wallhaven-379567lightbg.jpg') no-repeat 50% 50% fixed;
     background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -42,4 +41,3 @@ h6 {
     display: block;
     position: relative;
 }
-

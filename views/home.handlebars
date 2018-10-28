@@ -1,13 +1,16 @@
 <div class="relativeContainer">
     <nav class="navbar sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="./home.html">
                 <h3 class="pixelForest">Pixel Forest</h3>
             </a>
-            <div class="dropdown ml-auto">
-                <i class="fas fa-bars" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <div class="dropleft ml-auto">
+                <i class="fas fa-bars"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#"><i class="fas fa-cogs"></i> Settings</a>
+                    <a class="dropdown-item" href="post.html"><i class="fas fa-images"></i> Upload A Photo</a>
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-times"></i> Delete Account</a>
+                    <a class="dropdown-item" href="#"><button onclick="swapStyleSheet('./styles/css/light.css')">Light UI</button><button class="ml-auto" onclick="swapStyleSheet('./styles/css/main.css')">Dark UI</button><button onclick="swapStyleSheet('./styles/css/green.css')">Green UI</button></a>
                 </div>
             </div>
         </div>
