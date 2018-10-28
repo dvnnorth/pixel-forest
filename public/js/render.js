@@ -96,7 +96,7 @@ $(function () {
                             }
                             $modal.modal('show');
                         });
-                });
+                }); 
 
                 //Photo Delete Functionality
                 $('#photoDelete').on('click', function (event) {
