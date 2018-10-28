@@ -41,7 +41,7 @@ module.exports = function (app, firebase, fbAdmin) {
                             });
                     })
                     .catch(function (error) {
-                        console.log("Error fetching user data:", error);
+                        console.log('Error fetching user data:', error);
                     });
             });
         }
@@ -61,7 +61,7 @@ module.exports = function (app, firebase, fbAdmin) {
         if (token) {
             checkAuth(token, res, function (decodedToken) {
                 let uid = decodedToken.uid;
-                fbAdmin.auth().getUser(uid)
+                fbAdmin.auth().getUser(uid);
                 db.Posts.findOne({
                     where: {
                         id: req.params.id
@@ -72,7 +72,7 @@ module.exports = function (app, firebase, fbAdmin) {
                         res.send(post.dataValues);
                     })
                     .catch(function (error) {
-                        console.log("Error fetching user data:", error);
+                        console.log('Error fetching user data:', error);
                         res.statusCode = 500;
                         res.send(error);
                     });
@@ -125,7 +125,7 @@ module.exports = function (app, firebase, fbAdmin) {
                                             let originalFN = imgURL.substring(imgURL.lastIndexOf('/') + 1);
                                             let thumbnailFN = originalFN
                                                 .substring(0, originalFN.lastIndexOf('.')) + '_thumb' + originalFN.substring(originalFN.lastIndexOf('.'))
-                                                    .split('?')[0];
+                                                .split('?')[0];
 
 
                                             uploadThumbNail(outputBuffer, thumbnailFN, passedRes, postEntry);
@@ -140,7 +140,7 @@ module.exports = function (app, firebase, fbAdmin) {
                             });
                     })
                     .catch(function (error) {
-                        console.log("Error fetching user data:", error);
+                        console.log('Error fetching user data:', error);
                     });
             });
         }
@@ -219,7 +219,7 @@ module.exports = function (app, firebase, fbAdmin) {
             .catch(function (error) {
                 res.statusCode = 401;
                 res.send(error);
-            })
+            });
     });
 
     // Update a post
@@ -251,7 +251,7 @@ module.exports = function (app, firebase, fbAdmin) {
                             });
                     })
                     .catch(function (error) {
-                        console.log("Error fetching user data:", error);
+                        console.log('Error fetching user data:', error);
                     });
             });
         }
@@ -291,7 +291,7 @@ module.exports = function (app, firebase, fbAdmin) {
                             });
                     })
                     .catch(function (error) {
-                        console.log("Error deleting post data", error);
+                        console.log('Error deleting post data', error);
                     });
             });
         }
@@ -349,7 +349,7 @@ module.exports = function (app, firebase, fbAdmin) {
                             });
                     })
                     .catch(function (error) {
-                        console.log("Error fetching user data:", error);
+                        console.log('Error fetching user data:', error);
                     });
             });
         }

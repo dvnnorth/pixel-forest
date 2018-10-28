@@ -4,7 +4,18 @@
     input,textarea {
         margin: .4rem 0;
         width: 80%;
+    }
+
+    input {
         color: $white;
+    }
+
+    input#postTitle { 
+        color: $black;
+    }
+
+    textarea {
+        color: $black;
     }
 
     h3 {
