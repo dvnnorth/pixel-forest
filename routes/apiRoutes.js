@@ -125,8 +125,8 @@ module.exports = function (app, firebase, fbAdmin) {
                                             let originalFN = imgURL.substring(imgURL.lastIndexOf('/') + 1);
                                             let thumbnailFN = originalFN
                                                 .substring(0, originalFN.lastIndexOf('.')) + '_thumb' + originalFN.substring(originalFN.lastIndexOf('.'))
-                                                .split('?')[0];
-                                                
+                                                    .split('?')[0];
+
 
                                             uploadThumbNail(outputBuffer, thumbnailFN, passedRes, postEntry);
                                             // fs.writeFile(thumbnailFN, outputBuffer, 'binary', function (err) {
@@ -177,6 +177,10 @@ module.exports = function (app, firebase, fbAdmin) {
                         let created = result[1];
                         if (created) console.log('Created new user entry');
                         sendUser(res, dbUser.id);
+                    })
+                    .catch(function (err) {
+                        // print the error details
+                        console.log(err, req.body.email);
                     });
             })
             // Sign in errors

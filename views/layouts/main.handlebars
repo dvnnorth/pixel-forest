@@ -18,8 +18,49 @@
   {{{body}}}
 
   <script>
+    // Get or set UI value
+    console.log(sessionStorage.getItem('ui'));
+    if (sessionStorage.getItem('ui') === null) {
+      sessionStorage.setItem('ui', 0);
+    }
+    let ui = sessionStorage.getItem('ui');
+    switch (parseInt(ui)) {
+      case 0:
+        document.getElementById('pagestyle').setAttribute('href', './styles/css/main.css');
+        break;
+      case 1:
+        document.getElementById('pagestyle').setAttribute('href', './styles/css/light.css');
+        break;
+      case 2:
+        document.getElementById('pagestyle').setAttribute('href', './styles/css/green.css');
+        break;
+      default:
+        document.getElementById('pagestyle').setAttribute('href', './styles/css/main.css');
+        break;
+    }
+  </script>
+  <script>
+    function swapStyleSheet(sheet) {
+      document.getElementById('pagestyle').setAttribute('href', sheet);
+      switch (sheet) {
+        case './styles/css/light.css':
+          sessionStorage.setItem('ui', 1);
+          break;
+        case './styles/css/main.css':
+          sessionStorage.setItem('ui', 0);
+          break;
+        case './styles/css/green.css':
+          sessionStorage.setItem('ui', 2);
+          break;
+        default:
+          sessionStorage.setItem('ui', 0);
+          break;
+      }
+    }
 
   </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   <script>
     $(document).on("scroll", function () {
       if ($(document).scrollTop() > 100) {
@@ -30,14 +71,7 @@
         $('.bg').removeClass('show');
       }
     });
-
-    function swapStyleSheet(sheet) {
-      document.getElementById('pagestyle').setAttribute('href', sheet);
-    }
-
   </script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"

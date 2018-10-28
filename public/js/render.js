@@ -214,13 +214,6 @@ $(function () {
                             }
                         });
                 });
-
-                // Delete Account functionality
-                $('#deleteAccountCancel').on('click', function (event) {
-                    $('#deleteModal').modal('hide');
-                });
-
-                $('#deleteAccount')
             })
             .fail(function () {
                 window.location.replace(loginEndpoint);
