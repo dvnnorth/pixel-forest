@@ -39,12 +39,13 @@
             <div class="row">
                 <div class="col-8 offset-2">
                     <h3>Post Your Content</h3>
-                    <form action="POST">
+                    <form>
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-12">
-                                        <input type="file">
+                                        <input type="file" id="fileSelect" class="hidden">
+                                        <label class="btn-default" for="fileSelect">Select a File</label>
                                     </div>
                                     <div class="col-12">
                                         <input id="title" type="text" placeholder="Title">

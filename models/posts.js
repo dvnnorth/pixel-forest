@@ -30,7 +30,7 @@ module.exports = function (sequelize, DataTypes) {
     Posts.associate = function (models) {
         //post must belong to a user
         Posts.belongsTo(models.Users, {
-            foreignKey: models.Users.id
+            foreignKey: models.Users.userid
         });
     };
     return Posts;

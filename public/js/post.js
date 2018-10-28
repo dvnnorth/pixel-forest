@@ -46,7 +46,7 @@ function uploadImageAsPromise(imageFile) {
             task.snapshot.ref.getDownloadURL().then(function (downloadURL) {
 
                 $('#postSubmit').removeClass('d-none');
-                $('#postSubmit').on('click', function () {
+                $('#postSubmit').on('click', function (event) {
                     event.preventDefault();
                     if (sessionStorage.getItem('token')) {
                         var postData = {
